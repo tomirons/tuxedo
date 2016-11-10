@@ -1,0 +1,18 @@
+{
+    "name": "tomirons/tuxedos",
+    "description": "Mail templates for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Irons",
+            "email": "tom.irons@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.*",
+        "illuminate/mail": "^5.3",
+        "illuminate/notifications": "^5.3",
+        "illuminate/support": "^5.3"
+    },
+    "minimum-stability": "stable"
+}
