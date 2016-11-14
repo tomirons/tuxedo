@@ -13,15 +13,13 @@ class TuxedoServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tuxedo');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tuxedo');
 
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/resources/views' => resource_path('views/vendor/tuxedo'),
-            ], 'tomirons-tuxedo');
-        }
+        $this->publishes([
+            __DIR__ . '/resources/views' => resource_path('views/vendor/tuxedo'),
+        ], 'tomirons-tuxedo');
 
-        view()->composer(['tuxedo::master', 'tuxedo::templates.action', 'tuxedo::templates.alert', 'tuxedo::templates.invoice'], function($view){
+        view()->composer(['tuxedo::*'], function ($view) {
             $style = [
                 /* Layout ------------------------------ */
 
@@ -75,8 +73,8 @@ class TuxedoServiceProvider extends ServiceProvider
 
                 /* Invoice ------------------------------ */
 
-                'invoice' => 'margin: 40px auto; text-align: left; width: 400px;',
-                'invoice--padding' => 'padding: 5px;',
+                'invoice' => 'margin: 40px auto; text-align: left; width: 400px; line-height: 1.6;',
+                'invoice--padding' => 'padding: 5px 0;',
                 'invoice-items' => 'width: 100%',
                 'invoice-items--border' => 'border-top: #eee 1px solid;',
                 'invoice-items-total' => 'border-top: 2px solid #333; border-bottom: 2px solid #333; font-weight: 700;',
@@ -84,7 +82,8 @@ class TuxedoServiceProvider extends ServiceProvider
                 /* Misc ------------------------------ */
 
                 'no-top-margin' => 'margin-top: 0;',
-                'text-right' => 'text-align: right;'
+                'text-right' => 'text-align: right;',
+                'text-center' => 'text-align: center;'
             ];
 
             $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;';
