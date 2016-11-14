@@ -11,8 +11,14 @@ This package includes some base templates to use with Laravel's `Mail` classes.
 - [Installation](#installation)
 - [Classes](#classes)
     - [ActionMailable](#actionmailable)
+        - [Methods](#methods)
+        - [Example](#example)
     - [AlertMailable](#alertmailable)
+        - [Methods](#methods-1)
+        - [Example](#example-1)
     - [InvoiceMailable](#invoicemailable)
+        - [Methods](#methods-2)
+        - [Example](#example-2)
 - [License](#license)
 
 ## Installation
@@ -40,7 +46,7 @@ There are currently 3 different types of classes you can extend. `ActionMailable
 ### ActionMailable
 
 #### Methods
-- header($header) - Sets the header text for the message, it'll only be displayed if it's set.
+- `header($header)` - Sets the header text for the message, it'll only be displayed if it's set.
   
 #### Example
 ````php
@@ -84,8 +90,8 @@ class TuxedoTestMail extends ActionMailable
 ### AlertMailable
 
 #### Methods
-- type($type) - Sets the type of alert, options are `success`, `warning`, and `error`.
-- message($message) - Sets the message to display in the alert.
+- `type($type)` - Sets the type of alert, options are `success`, `warning`, and `error`.
+- `message($message)` - Sets the message to display in the alert.
 
 #### Example
 ````php
@@ -128,8 +134,8 @@ class TuxedoTestMail extends AlertMailable
 ### InvoiceMailable
 
 #### Methods
-- information($name, $number, $date) - Sets the information that gets displayed at the top invoice.
-- item($name, $price) - Add an item to the invoice
+- `information($name, $number, $date)` - Sets the information that gets displayed at the top invoice.
+- `item($name, $price)` - Add an item to the invoice
 
 #### Example
 ````php
