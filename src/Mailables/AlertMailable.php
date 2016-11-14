@@ -17,6 +17,13 @@ class AlertMailable extends TuxedoMailable
     protected $view = 'tuxedo::templates.alert';
 
     /**
+     * The plain text view to use for the message.
+     *
+     * @var string
+     */
+    protected $textView = 'tuxedo::templates.alert-plain';
+
+    /**
      * The type of alert.
      *
      * @var string|null

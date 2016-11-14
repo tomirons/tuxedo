@@ -14,7 +14,14 @@ class ActionMailable extends TuxedoMailable
      *
      * @var string
      */
-    public $view = 'tuxedo::templates.action';
+    protected $view = 'tuxedo::templates.action';
+
+    /**
+     * The plain text view to use for the message.
+     *
+     * @var string
+     */
+    protected $textView = 'tuxedo::templates.action-plain';
 
     /**
      * The header for the message.

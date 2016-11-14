@@ -17,6 +17,13 @@ class InvoiceMailable extends TuxedoMailable
     public $view = 'tuxedo::templates.invoice';
 
     /**
+     * The plain text view to use for the message.
+     *
+     * @var string
+     */
+    protected $textView = 'tuxedo::templates.invoice-plain';
+
+    /**
      * The user's name
      *
      * @var string|null
