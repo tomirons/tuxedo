@@ -21,26 +21,37 @@ class AlertMailable extends TuxedoMailable
      *
      * @var string|null
      */
-    public $alertType = null;
+    public $type = null;
 
     /**
      * The text of the alert.
      *
      * @var string|null
      */
-    public $alertText = null;
+    public $message = null;
 
     /**
-     * Set the alert type and text for the message.
+     * Set the type of alert for the message.
      *
      * @param string $type
-     * @param string $text
      * @return $this
      */
-    public function alert($type, $text)
+    public function type($type)
     {
-        $this->alertType = $type;
-        $this->alertText = $text;
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Set the alert "message" for the message.
+     *
+     * @param string $message
+     * @return $this
+     */
+    public function message($message)
+    {
+        $this->message = $message;
 
         return $this;
     }
