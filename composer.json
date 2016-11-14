@@ -13,10 +13,5 @@
         "illuminate/mail": "^5.3",
         "illuminate/support": "^5.3"
     },
-    "autoload": {
-        "psr-4": {
-            "TomIrons\\Tuxedo\\": "src/"
-        }
-    },
     "minimum-stability": "stable"
 }
