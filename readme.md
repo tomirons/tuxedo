@@ -28,13 +28,19 @@ This package includes some base templates to use with Laravel's `Mail` classes.
 
 ## Installation
 1) Run the following command:   
-    `$ composer require tomirons/tuxedo`
+    ````
+    $ composer require tomirons/tuxedo
+    `````
     
 2) Open your `config/app.php` and add the following class to your `providers` array:   
-    `TomIrons\Tuxedo\TuxedoServiceProvider::class`
+    ````
+    TomIrons\Tuxedo\TuxedoServiceProvider::class
+    ````
     
 3) (Optional) If you would like to edit the templates, run the following command to publish them
-    `php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider`
+    ````
+    php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
+    ````
     
 ## Classes
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
