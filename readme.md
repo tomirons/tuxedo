@@ -11,14 +11,8 @@ This package includes some base templates to use with Laravel's `Mail` classes.
 - [Installation](#installation)
 - [Classes](#classes)
     - [ActionMailable](#actionmailable)
-        - [Methods](#methods)
-        - [Example](#example)
     - [AlertMailable](#alertmailable)
-        - [Methods](#methods-1)
-        - [Example](#example-1)
     - [InvoiceMailable](#invoicemailable)
-        - [Methods](#methods-2)
-        - [Example](#example-2)
 - [License](#license)
 
 ## Installation
