@@ -3,7 +3,7 @@
 [![License](https://poser.pugx.org/tomirons/tuxedo/license.svg)](https://packagist.org/packages/tomirons/tuxedo)
 [![Total Downloads](https://img.shields.io/packagist/dt/tomirons/tuxedo.svg)](https://packagist.org/packages/tomirons/tuxedo)
 
-This package includes some base templates to use with Laravel's `Mail` classes.
+Tuxedo is an easy way to send transactional emails with Laravel's `Mail` classes, with the templates already done for you.
 
 ## Contents
 

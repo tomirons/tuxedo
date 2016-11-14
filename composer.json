@@ -1,6 +1,6 @@
 {
     "name": "tomirons/tuxedo",
-    "description": "Mail templates for laravel",
+    "description": "Basic transactional mail templates for laravel 5.3",
     "license": "MIT",
     "authors": [
         {
