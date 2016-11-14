@@ -14,7 +14,7 @@ class AlertMailable extends TuxedoMailable
      *
      * @var string
      */
-    public $view = 'tuxedo::templates.alert';
+    protected $view = 'tuxedo::templates.alert';
 
     /**
      * The type of alert.
@@ -28,7 +28,7 @@ class AlertMailable extends TuxedoMailable
      *
      * @var string|null
      */
-    public $message = null;
+    public $text = null;
 
     /**
      * Set the type of alert for the message.
@@ -46,12 +46,12 @@ class AlertMailable extends TuxedoMailable
     /**
      * Set the alert "message" for the message.
      *
-     * @param string $message
+     * @param string $text
      * @return $this
      */
-    public function message($message)
+    public function text($text)
     {
-        $this->message = $message;
+        $this->text = $text;
 
         return $this;
     }
