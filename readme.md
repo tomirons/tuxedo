@@ -27,18 +27,18 @@ This package includes some base templates to use with Laravel's `Mail` classes.
 - [License](#license)
 
 ## Installation
-1) Run the following command:   
-    ````
+1) Run the following command:
+    ````php
     $ composer require tomirons/tuxedo
     `````
     
-2) Open your `config/app.php` and add the following class to your `providers` array:   
-    ````
+2) Open your `config/app.php` and add the following class to your `providers` array:
+    ````php
     TomIrons\Tuxedo\TuxedoServiceProvider::class
     ````
     
 3) (Optional) If you would like to edit the templates, run the following command to publish them
-    ````
+    ````php
     php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
     ````
     
@@ -51,7 +51,7 @@ There are currently 3 different types of classes you can extend. `ActionMailable
 - header($header) - Sets the header text for the message, it'll only be displayed if it's set.
   
 #### Example
-````
+````php
 <?php
 
 namespace App\Mail;
@@ -96,7 +96,7 @@ class TuxedoTestMail extends ActionMailable
 - message($message) - Sets the message to display in the alert.
 
 #### Example
-````
+````php
 <?php
 
 namespace App\Mail;
@@ -140,7 +140,7 @@ class TuxedoTestMail extends AlertMailable
 - item($name, $price) - Add an item to the invoice
 
 #### Example
-````
+````php
 <?php
 
 namespace App\Mail;
