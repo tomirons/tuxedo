@@ -11,5 +11,3 @@ matrix:
 
 before_script:
   - travis_retry composer self-update
-
-script: vendor/bin/phpunit
