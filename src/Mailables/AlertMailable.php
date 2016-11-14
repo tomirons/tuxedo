@@ -51,14 +51,14 @@ class AlertMailable extends TuxedoMailable
     }
 
     /**
-     * Set the alert "message" for the message.
+     * Set the alert text for the message.
      *
-     * @param string $text
+     * @param $message
      * @return $this
      */
-    public function text($text)
+    public function message($message)
     {
-        $this->text = $text;
+        $this->text = $message;
 
         return $this;
     }
