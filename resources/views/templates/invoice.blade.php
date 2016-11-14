@@ -1,9 +1,18 @@
 @extends('tuxedo::master')
 
+@section('header')
+    <h2 style="{{ $style['text-center'] . $style['no-top-margin'] }}">Thank you for your order!</h2>
+@endsection
+
 @section('content')
-    <table style="{{ $style['invoice'] }}" class="invoice">
+    <!-- Invoice -->
+    <table style="{{ $style['invoice'] }}">
         <tr>
-            <td style="{{ $style['invoice--padding'] }}">Lee Munroe<br>Invoice #12345<br>June 01 2014</td>
+            <td style="{{ $style['invoice--padding'] }}">
+                {{ $name }}<br>
+                Invoice #{{ $invoiceNumber }}<br>
+                {{ $date }}
+            </td>
         </tr>
         <tr>
             <td>
@@ -14,9 +23,9 @@
                             <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] }}">$ {{ $item['price'] }}</td>
                         </tr>
                     @endforeach
-                    <tr style="{{ $style['invoice-items-total'] }}">
-                        <td style="{{ $style['text-right'] }}" width="80%">Total</td>
-                        <td style="{{ $style['text-right'] }}">$ 33.98</td>
+                    <tr>
+                        <td style="{{ $style['text-right'] . $style['invoice--padding'] . $style['invoice-items-total'] }}" width="80%">Total</td>
+                        <td style="{{ $style['text-right'] . $style['invoice--padding'] . $style['invoice-items-total'] }}">$ {{ number_format($total, 2, '.', ',') }}</td>
                     </tr>
                 </table>
             </td>

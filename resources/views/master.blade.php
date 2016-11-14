@@ -29,14 +29,7 @@
                         </td>
                     </tr>
 
-                    <!-- Alert -->
-                    @if ($alert)
-                        <tr>
-                            <td style="{{ $fontFamily }} {{ $style['alert'] . $style['alert--'.$alertType] }}">
-                                {{ $alertText }}
-                            </td>
-                        </tr>
-                    @endif
+                    @yield('before')
 
                     <!-- Email Body -->
                     <tr>
@@ -44,7 +37,7 @@
                             <table style="{{ $style['email-body_inner'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
-                                        @yield('before')
+                                        @yield('header')
 
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
@@ -59,35 +52,6 @@
                                         @endforeach
 
                                         @yield('content')
-
-                                        <!-- Action Button -->
-                                        @if (isset($actionText))
-                                            <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="center">
-                                                        <?php
-                                                        switch ($level) {
-                                                            case 'success':
-                                                                $actionColor = 'button--green';
-                                                                break;
-                                                            case 'error':
-                                                                $actionColor = 'button--red';
-                                                                break;
-                                                            default:
-                                                                $actionColor = 'button--blue';
-                                                        }
-                                                        ?>
-
-                                                        <a href="{{ $actionUrl }}"
-                                                           style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
-                                                           class="button"
-                                                           target="_blank">
-                                                            {{ $actionText }}
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        @endif
 
                                         <!-- Outro -->
                                         @foreach ($outroLines as $line)
@@ -126,7 +90,7 @@
                         </td>
                     </tr>
 
-                    @yield('after_footer')
+                    @yield('after')
 
                     <!-- Footer -->
                     <tr>
