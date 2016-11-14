@@ -1,5 +1,4 @@
 # Tuxedo
-[![Build Status](https://travis-ci.org/tomirons/tuxedo.svg)](https://travis-ci.org/tomirons/tuxedo)
 [![Version](https://img.shields.io/packagist/v/tomirons/tuxedo.svg)](https://packagist.org/packages/tomirons/tuxedo)
 [![License](https://poser.pugx.org/tomirons/tuxedo/license.svg)](https://packagist.org/packages/tomirons/tuxedo)
 [![Total Downloads](https://img.shields.io/packagist/dt/tomirons/tuxedo.svg)](https://packagist.org/packages/tomirons/tuxedo)
