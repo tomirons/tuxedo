@@ -1,30 +1,13 @@
 <?php
 
+/**
+ * @credit Taylor Ottwell for the base of this trait, used `SimpleMessage` from laravel/laravel
+ */
+
 namespace TomIrons\Tuxedo;
 
 trait Message
 {
-    /**
-     * Determine if the "message" is an alert message.
-     *
-     * @var bool
-     */
-    public $alert = false;
-
-    /**
-     * Determine if the "message" is an action message.
-     *
-     * @var bool
-     */
-    public $action = false;
-
-    /**
-     * Determine if the "message" is an invoice message.
-     *
-     * @var bool
-     */
-    public $invoice = false;
-
     /**
      * The "level" of the notification (info, success, error).
      *
