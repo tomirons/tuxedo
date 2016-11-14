@@ -39,7 +39,6 @@ class AlertMailable extends TuxedoMailable
      */
     public function alert($type, $text)
     {
-        $this->alert = true;
         $this->alertType = $type;
         $this->alertText = $text;
 
