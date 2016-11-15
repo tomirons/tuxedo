@@ -11,6 +11,7 @@
     "require": {
         "php": ">=7.0.0",
         "illuminate/mail": "^5.3",
+        "illuminate/notifications": "^5.3",
         "illuminate/support": "^5.3"
     },
     "autoload": {
