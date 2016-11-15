@@ -2,10 +2,10 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
+use Illuminate\Mail\Mailable;
 use TomIrons\Tuxedo\Message;
-use TomIrons\Tuxedo\TuxedoMailable;
 
-class AlertMailable extends TuxedoMailable
+class AlertMailable extends Mailable
 {
     use Message;
 
@@ -51,14 +51,14 @@ class AlertMailable extends TuxedoMailable
     }
 
     /**
-     * Set the alert text for the message.
+     * Set the alert "message" for the message.
      *
-     * @param $message
+     * @param string $text
      * @return $this
      */
-    public function message($message)
+    public function message($text)
     {
-        $this->text = $message;
+        $this->text = $text;
 
         return $this;
     }

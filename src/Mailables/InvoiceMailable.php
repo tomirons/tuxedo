@@ -2,10 +2,10 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
+use Illuminate\Mail\Mailable;
 use TomIrons\Tuxedo\Message;
-use TomIrons\Tuxedo\TuxedoMailable;
 
-class InvoiceMailable extends TuxedoMailable
+class InvoiceMailable extends Mailable
 {
     use Message;
 
@@ -56,7 +56,7 @@ class InvoiceMailable extends TuxedoMailable
      *
      * @var array
      */
-    public $items = [];
+    public $items;
 
     /**
      * Add an item to the invoice
@@ -90,6 +90,23 @@ class InvoiceMailable extends TuxedoMailable
         $this->name = $name;
         $this->invoiceNumber = $number;
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Add a line of text to the message.
+     *
+     * @param  string|array $line
+     * @return $this
+     */
+    public function line($line)
+    {
+        if (! $this->items) {
+            $this->introLines[] = $this->formatLine($line);
+        } else {
+            $this->outroLines[] = $this->formatLine($line);
+        }
 
         return $this;
     }
