@@ -9,11 +9,11 @@ if (! empty($introLines)) {
 }
 
 echo "Name: {$name}", "\n";
-echo "Invoice #: {$number}", "\n";
-echo "Date: {$date}", "\n";
+echo "Invoice: {$number}", "\n";
+echo "Date: {$date}", "\n\n";
 
 foreach ($items as $item) {
-    echo $item['name'] . ": {$item['price']}", "\n\n";
+    echo $item['name'] . ": {$item['price']}", "\n";
 }
 
 echo "Total: " . number_format($total, 2, '.', ','), "\n\n";

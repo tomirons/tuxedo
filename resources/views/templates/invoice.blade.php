@@ -10,7 +10,7 @@
         <tr>
             <td style="{{ $style['invoice--padding'] }}">
                 {{ $name }}<br>
-                Invoice #{{ $number }}<br>
+                Invoice No. {{ $number }}<br>
                 {{ $date }}
             </td>
         </tr>
