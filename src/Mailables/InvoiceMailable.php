@@ -35,7 +35,7 @@ class InvoiceMailable extends Mailable
      *
      * @var string|null
      */
-    public $invoiceNumber = null;
+    public $number = null;
 
     /**
      * The invoice date
@@ -78,7 +78,7 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the information for the invoice
+     * Set the customer information for the invoice
      *
      * @param string $name
      * @param string|integer $number
@@ -88,7 +88,7 @@ class InvoiceMailable extends Mailable
     public function information($name, $number, $date)
     {
         $this->name = $name;
-        $this->invoiceNumber = $number;
+        $this->number = $number;
         $this->date = $date;
 
         return $this;

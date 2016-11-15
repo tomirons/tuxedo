@@ -8,6 +8,10 @@ if (! empty($introLines)) {
     echo implode("\n", $introLines), "\n\n";
 }
 
+echo "Name: {$name}", "\n";
+echo "Invoice #: {$number}", "\n";
+echo "Date: {$date}", "\n";
+
 foreach ($items as $item) {
     echo $item['name'] . ": {$item['price']}", "\n\n";
 }
