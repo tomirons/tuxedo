@@ -29,7 +29,7 @@
                         </td>
                     </tr>
 
-                    @yield('before')
+                    @yield('alert')
 
                     <!-- Email Body -->
                     <tr>
@@ -89,8 +89,6 @@
                             </table>
                         </td>
                     </tr>
-
-                    @yield('after')
 
                     <!-- Footer -->
                     <tr>
