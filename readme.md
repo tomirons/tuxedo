@@ -35,11 +35,19 @@ php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
     
 ## Classes
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
+
+#### General Methods
+- `gretting($gretting)` - Sets the greeting for the message.
+- `line($line)` - Add a line of text to the message.
   
 ### ActionMailable
 
 #### Methods
 - `header($header)` - Sets the header text for the message, it'll only be displayed if it's set.
+- `level($level)` - Sets the level type of the button. Available options are `success` and `error`.
+- `action($text, $url)` - Sets the button text and url.
+- `success()` - Sets the level type to `success`.
+- `error()` - Sets the level type to `error`.
   
 #### Example
 ````php
@@ -73,6 +81,7 @@ class TuxedoTestMail extends ActionMailable
     public function build()
     {
         return $this->header('Some Random Header')
+                    ->level('success')
                     ->line('Some line of text to tell you what exactly is going on.')
                     ->action('Click Me', url('/'))
                     ->line('Some other information to be displayed after the button.');
