@@ -73,6 +73,20 @@ class InvoiceMailable extends Mailable
     public $items;
 
     /**
+     * The column to find the name of a product.
+     *
+     * @var string
+     */
+    protected $nameKey = 'product_name';
+
+    /**
+     * The column to find the price of a product.
+     *
+     * @var string
+     */
+    protected $priceKey = 'product_price';
+
+    /**
      * Add an item to the invoice
      *
      * @param string $name
@@ -87,6 +101,21 @@ class InvoiceMailable extends Mailable
         ];
 
         $this->subtotal += $price;
+
+        return $this;
+    }
+
+    /**
+     * Add multiple item's to the invoice
+     *
+     * @param array $items
+     * @return $this
+     */
+    public function items(array $items)
+    {
+        foreach ($items as $item) {
+            $this->item($item[$this->nameKey], $item[$this->priceKey]);
+        }
 
         return $this;
     }
