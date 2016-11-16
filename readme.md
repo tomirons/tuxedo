@@ -135,9 +135,14 @@ class TuxedoTestMail extends AlertMailable
 
 ### InvoiceMailable
 
+#### Properties
+- `$nameKey` - Set the key used to find the product name when using `items()`. Defaults to `product_name`.
+- `$priceKey` - Set the key used to find the product price when using `items()`. Defaults to `product_price`.
+
 #### Methods
 - `date($date)` - Sets the date to display at the top of the invoice table.
 - `item($name, $price)` - Add an item to the invoice
+- `items($items)` - Add an array of items to the invoice.
 - `tax($percentage)` - Set the tax percentage to use for the invoice.
 - `shipping($shipping)` - Set the cost of shipping for the invoice.
 - `calculate()` - Calculates the tax and final total, **MUST** be the last method called.
@@ -175,9 +180,7 @@ class TuxedoTestMail extends InvoiceMailable
     {
         return $this->date(date('l, M j Y \a\t g:i a'))
                     ->item('Example Product', '123.99')
-                    ->item('Second Product', '321.99')
-                    ->item('Third Product', '123.45')
-                    ->item('Forth Product', '678.90')
+                    ->items(['product_name' => 'Second Product', 'product_price' => 123.45])
                     ->tax(7)
                     ->shipping(10)
                     ->calculate();
