@@ -15,9 +15,11 @@ class TuxedoServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tuxedo');
 
-        $this->publishes([
-            __DIR__ . '/resources/views' => resource_path('views/vendor/tuxedo'),
-        ], 'tomirons-tuxedo');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/tuxedo'),
+            ], 'tuxedo');
+        }
 
         view()->composer(['tuxedo::*'], function ($view) {
             $style = [
@@ -73,15 +75,21 @@ class TuxedoServiceProvider extends ServiceProvider
 
                 /* Invoice ------------------------------ */
 
-                'invoice' => 'margin: 40px auto; text-align: left; width: 400px; line-height: 1.6;',
+                'invoice' => 'margin: 10px auto 20px; text-align: left; width: 400px; line-height: 1.6;',
                 'invoice--padding' => 'padding: 5px 0;',
-                'invoice-items' => 'width: 100%',
+                'invoice-date' => 'color: #ADB0B5;',
+                'invoice-item' => 'color: #666666;',
+                'invoice-items' => 'width: 100%;',
+                'invoice-items--price' => 'width: 20%;',
                 'invoice-items--border' => 'border-top: #eee 1px solid;',
+                'invoice-subtotal' => 'color: #000000;',
                 'invoice-items-total' => 'border-top: 2px solid #333; border-bottom: 2px solid #333; font-weight: 700;',
+                'invoice-address' => 'margin: 0; color: #B5B5B5;',
 
                 /* Misc ------------------------------ */
 
                 'no-top-margin' => 'margin-top: 0;',
+                'no-bottom-margin' => 'margin-bottom: 0;',
                 'text-right' => 'text-align: right;',
                 'text-center' => 'text-align: center;'
             ];
