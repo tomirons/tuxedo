@@ -37,11 +37,11 @@
                             <table style="{{ $style['email-body_inner'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
-                                        @yield('header')
+                                        @yield('body_header')
 
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                            {{ $greeting ?? 'Hello'}}
+                                            {{ $greeting ?? null }}
                                         </h1>
 
                                         <!-- Intro -->
@@ -65,25 +65,7 @@
                                             Regards,<br>{{ config('app.name') }}
                                         </p>
 
-                                        <!-- Sub Copy -->
-                                        @if (isset($actionText))
-                                            <table style="{{ $style['body_sub'] }}">
-                                                <tr>
-                                                    <td style="{{ $fontFamily }}">
-                                                        <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the "{{ $actionText }}" button,
-                                                            copy and paste the URL below into your web browser:
-                                                        </p>
-
-                                                        <p style="{{ $style['paragraph-sub'] }}">
-                                                            <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}" target="_blank">
-                                                                {{ $actionUrl }}
-                                                            </a>
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        @endif
+                                        @yield('body_footer')
                                     </td>
                                 </tr>
                             </table>
