@@ -24,32 +24,46 @@ class InvoiceMailable extends Mailable
     protected $textView = 'tuxedo::templates.invoice-plain';
 
     /**
-     * The user's name
+     * The total amount of tax
      *
-     * @var string|null
+     * @var string|int
      */
-    public $name = null;
+    public $tax;
 
     /**
-     * The invoice Number
+     * The tax percentage
      *
-     * @var string|null
+     * @var string|int
      */
-    public $number = null;
+    public $taxPercent;
+
+    /**
+     * The cost of shipping
+     *
+     * @var string|int
+     */
+    public $shipping;
 
     /**
      * The invoice date
      *
-     * @var string|null
+     * @var string
      */
-    public $date = null;
+    public $date;
+
+    /**
+     * The total before tax and shipping
+     *
+     * @var string|int
+     */
+    public $subtotal;
 
     /**
      * The invoice total
      *
-     * @var string|null
+     * @var string|int
      */
-    public $total = null;
+    public $total;
 
     /**
      * The items that are on the invoice
@@ -62,7 +76,7 @@ class InvoiceMailable extends Mailable
      * Add an item to the invoice
      *
      * @param string $name
-     * @param string|integer $price
+     * @param string|int $price
      * @return $this
      */
     public function item($name, $price)
@@ -72,7 +86,21 @@ class InvoiceMailable extends Mailable
             'price' => $price
         ];
 
-        $this->total += $price;
+        $this->subtotal += $price;
+
+        return $this;
+    }
+
+    /**
+     * Calculate the tax and total
+     *
+     * @return $this
+     */
+    public function calculate()
+    {
+        $this->tax = $this->subtotal * ($this->taxPercent / 100);
+
+        $this->total = $this->subtotal + $this->tax + $this->shipping;
 
         return $this;
     }
@@ -80,16 +108,38 @@ class InvoiceMailable extends Mailable
     /**
      * Set the customer information for the invoice
      *
-     * @param string $name
-     * @param string|integer $number
      * @param string $date
      * @return $this
      */
-    public function information($name, $number, $date)
+    public function date($date)
     {
-        $this->name = $name;
-        $this->number = $number;
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Set the shipping cost
+     *
+     * @param string|int $shipping
+     * @return $this
+     */
+    public function shipping($shipping)
+    {
+        $this->shipping = $shipping;
+
+        return $this;
+    }
+
+    /**
+     * Set the tax percentage
+     *
+     * @param string|int $percent
+     * @return $this
+     */
+    public function tax($percent)
+    {
+        $this->taxPercent = $percent;
 
         return $this;
     }

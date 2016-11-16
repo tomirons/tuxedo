@@ -2,18 +2,29 @@
 
 echo "Thank you for your order!", "\n\n";
 
-echo $greeting ?? "Hello", "\n\n";
+if (isset($greeting))
+{
+    echo $greeting, "\n\n";
+}
 
 if (! empty($introLines)) {
     echo implode("\n", $introLines), "\n\n";
 }
 
-echo "Name: {$name}", "\n";
-echo "Invoice: {$number}", "\n";
 echo "Date: {$date}", "\n\n";
 
 foreach ($items as $item) {
     echo $item['name'] . ": {$item['price']}", "\n";
+}
+
+echo "\nSubtotal: " . number_format($subtotal, 2, '.', ','), "\n";
+
+if (isset($tax)){
+    echo "Tax: " . number_format($tax, 2, '.', ','), "\n";
+}
+
+if (isset($shipping)){
+    echo "Shipping: " . number_format($shipping, 2, '.', ','), "\n";
 }
 
 echo "Total: " . number_format($total, 2, '.', ','), "\n\n";
