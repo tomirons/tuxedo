@@ -3,6 +3,7 @@
 namespace TomIrons\Tuxedo\Mailables;
 
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Collection;
 use TomIrons\Tuxedo\Message;
 
 class InvoiceMailable extends Mailable
@@ -108,11 +109,15 @@ class InvoiceMailable extends Mailable
     /**
      * Add multiple item's to the invoice
      *
-     * @param array $items
+     * @param array|object $items
      * @return $this
      */
-    public function items(array $items)
+    public function items($items)
     {
+        if (! $items instanceof Collection) {
+            $items = collect($items);
+        }
+
         foreach ($items as $item) {
             $this->item($item[$this->nameKey], $item[$this->priceKey]);
         }

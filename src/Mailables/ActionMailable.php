@@ -104,8 +104,8 @@ class ActionMailable extends Mailable
     /**
      * Configure the "call to action" button.
      *
-     * @param  string  $text
-     * @param  string  $url
+     * @param  string $text
+     * @param  string $url
      * @return $this
      */
     public function action($text, $url)
