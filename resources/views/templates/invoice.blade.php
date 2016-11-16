@@ -27,14 +27,14 @@
                         <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ $subtotal }}</td>
                     </tr>
 
-                    @if (isset($tax))
+                    @if ($tax > 0)
                         <tr style="{{ $style['invoice-subtotal'] }}">
                             <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">Tax</td>
                             <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ number_format($tax, 2, '.', ',') }}</td>
                         </tr>
                     @endif
 
-                    @if (isset($shipping))
+                    @if ($shipping)
                         <tr style="{{ $style['invoice-subtotal'] }}">
                             <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">Shipping</td>
                             <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ number_format($shipping, 2, '.', ',') }}</td>
