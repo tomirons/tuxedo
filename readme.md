@@ -136,8 +136,11 @@ class TuxedoTestMail extends AlertMailable
 ### InvoiceMailable
 
 #### Methods
-- `information($name, $number, $date)` - Sets the information that gets displayed at the top invoice.
+- `date($date)` - Sets the date to display at the top of the invoice table.
 - `item($name, $price)` - Add an item to the invoice
+- `tax($percentage)` - Set the tax percentage to use for the invoice.
+- `shipping($shipping)` - Set the cost of shipping for the invoice.
+- `calculate()` - Calculates the tax and final total, **MUST** be the last method called.
 
 #### Example
 ````php
@@ -170,9 +173,14 @@ class TuxedoTestMail extends InvoiceMailable
      */
     public function build()
     {
-        return $this->information('John Doe', '123456', date('F jS, Y'))
+        return $this->date(date('l, M j Y \a\t g:i a'))
                     ->item('Example Product', '123.99')
-                    ->item('Another Example Product', '321.99');
+                    ->item('Second Product', '321.99')
+                    ->item('Third Product', '123.45')
+                    ->item('Forth Product', '678.90')
+                    ->tax(7)
+                    ->shipping(10)
+                    ->calculate();
     }
 }
 ````
