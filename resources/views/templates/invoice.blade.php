@@ -17,14 +17,14 @@
                 <table style="{{ $style['invoice-items'] }}" cellpadding="0" cellspacing="0">
                     @foreach ($items as $item)
                         <tr style="{{ $style['invoice-item'] }}">
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">{{ $item['name'] }}</td>
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ $item['price'] }}</td>
+                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">{{ $item['product_name'] }}</td>
+                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ $item['product_price'] }}</td>
                         </tr>
                     @endforeach
 
                     <tr style="{{ $style['invoice-subtotal'] }}">
                         <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">Subtotal</td>
-                        <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ $subtotal }}</td>
+                        <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ number_format($subtotal, 2, '.', ',') }}</td>
                     </tr>
 
                     @if ($tax > 0)

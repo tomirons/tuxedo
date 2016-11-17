@@ -14,16 +14,16 @@ if (! empty($introLines)) {
 echo "Date: {$date}", "\n\n";
 
 foreach ($items as $item) {
-    echo $item['name'] . ": {$item['price']}", "\n";
+    echo "{$item['product_name']} : {$item['product_price']}", "\n";
 }
 
 echo "\nSubtotal: " . number_format($subtotal, 2, '.', ','), "\n";
 
-if (isset($tax)){
+if ($tax > 0){
     echo "Tax: " . number_format($tax, 2, '.', ','), "\n";
 }
 
-if (isset($shipping)){
+if ($shipping > 0){
     echo "Shipping: " . number_format($shipping, 2, '.', ','), "\n";
 }
 
