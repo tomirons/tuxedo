@@ -141,8 +141,7 @@ class TuxedoTestMail extends AlertMailable
 
 #### Methods
 - `date($date)` - Sets the date to display at the top of the invoice table.
-- `item($name, $price)` - Add an item to the invoice
-- `items($items)` - Add an array of items to the invoice.
+- `items($items)` - Add an list of items to the invoice. Acceptable variable types are `Collection` and `array`.
 - `tax($percentage)` - Set the tax percentage to use for the invoice.
 - `shipping($shipping)` - Set the cost of shipping for the invoice.
 - `calculate()` - Calculates the tax and final total, **MUST** be the last method called.
@@ -161,7 +160,7 @@ use TomIrons\Tuxedo\Mailables\InvoiceMailable;
 class TuxedoTestMail extends InvoiceMailable 
 {
     use Queueable, SerializesModels;
-
+    
     /**
      * Create a new message instance.
      *
@@ -179,10 +178,12 @@ class TuxedoTestMail extends InvoiceMailable
     public function build()
     {
         return $this->date(date('l, M j Y \a\t g:i a'))
-                    ->item('Example Product', '123.99')
-                    ->items(['product_name' => 'Second Product', 'product_price' => 123.45])
-                    ->tax(7)
-                    ->shipping(10)
+                    ->items([
+                        ['product_name' => 'Example Product', 'product_price' => 123.99],
+                        ['product_name' => 'Second Product', 'product_price' => 321.99]
+                    ])
+                    ->tax(3)
+                    ->shipping(15)
                     ->calculate();
     }
 }
