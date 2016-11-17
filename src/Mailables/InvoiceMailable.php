@@ -69,7 +69,7 @@ class InvoiceMailable extends Mailable
     /**
      * The items that are on the invoice
      *
-     * @var array
+     * @var Collection
      */
     public $items;
 
@@ -88,28 +88,9 @@ class InvoiceMailable extends Mailable
     protected $priceKey = 'product_price';
 
     /**
-     * Add an item to the invoice
-     *
-     * @param string $name
-     * @param string|int $price
-     * @return $this
-     */
-    public function item($name, $price)
-    {
-        $this->items[] = [
-            'name' => $name,
-            'price' => $price
-        ];
-
-        $this->subtotal += $price;
-
-        return $this;
-    }
-
-    /**
      * Add multiple item's to the invoice
      *
-     * @param array|object $items
+     * @param Collection|array $items
      * @return $this
      */
     public function items($items)
@@ -126,12 +107,32 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Calculate the tax and total
+     * Add an item to the invoice
+     *
+     * @param string $name
+     * @param string|int $price
+     */
+    private function item($name, $price)
+    {
+        if (! $this->items instanceof Collection) {
+            $this->items = new Collection;
+        }
+
+        $this->items->push([
+            'product_name' => $name,
+            'product_price' => $price
+        ]);
+    }
+
+    /**
+     * Calculate the subtotal, tax, and total
      *
      * @return $this
      */
     public function calculate()
     {
+        $this->subtotal = $this->items->sum('product_price');
+
         $this->tax = $this->subtotal * ($this->taxPercent / 100);
 
         $this->total = $this->subtotal + $this->tax + $this->shipping;
