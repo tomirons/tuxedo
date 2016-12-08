@@ -41,6 +41,7 @@ class AlertMailable extends Mailable
      * Set the type of alert for the message.
      *
      * @param string $type
+     *
      * @return $this
      */
     public function type($type)
@@ -54,6 +55,7 @@ class AlertMailable extends Mailable
      * Set the alert "message" for the message.
      *
      * @param string $text
+     *
      * @return $this
      */
     public function message($text)

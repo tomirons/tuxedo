@@ -25,49 +25,49 @@ class InvoiceMailable extends Mailable
     protected $textView = 'tuxedo::templates.invoice-plain';
 
     /**
-     * The total amount of tax
+     * The total amount of tax.
      *
      * @var string|int
      */
     public $tax;
 
     /**
-     * The tax percentage
+     * The tax percentage.
      *
      * @var string|int
      */
     public $taxPercent;
 
     /**
-     * The cost of shipping
+     * The cost of shipping.
      *
      * @var string|int
      */
     public $shipping;
 
     /**
-     * The invoice date
+     * The invoice date.
      *
      * @var string
      */
     public $date;
 
     /**
-     * The total before tax and shipping
+     * The total before tax and shipping.
      *
      * @var string|int
      */
     public $subtotal;
 
     /**
-     * The invoice total
+     * The invoice total.
      *
      * @var string|int
      */
     public $total;
 
     /**
-     * The items that are on the invoice
+     * The items that are on the invoice.
      *
      * @var Collection
      */
@@ -88,14 +88,15 @@ class InvoiceMailable extends Mailable
     protected $priceKey = 'product_price';
 
     /**
-     * Add multiple item's to the invoice
+     * Add multiple item's to the invoice.
      *
      * @param Collection|array $items
+     *
      * @return $this
      */
     public function items($items)
     {
-        if (! $items instanceof Collection) {
+        if (!$items instanceof Collection) {
             $items = collect($items);
         }
 
@@ -107,25 +108,25 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Add an item to the invoice
+     * Add an item to the invoice.
      *
-     * @param string $name
+     * @param string     $name
      * @param string|int $price
      */
     private function item($name, $price)
     {
-        if (! $this->items instanceof Collection) {
-            $this->items = new Collection;
+        if (!$this->items instanceof Collection) {
+            $this->items = new Collection();
         }
 
         $this->items->push([
-            'product_name' => $name,
-            'product_price' => $price
+            'product_name'  => $name,
+            'product_price' => $price,
         ]);
     }
 
     /**
-     * Calculate the subtotal, tax, and total
+     * Calculate the subtotal, tax, and total.
      *
      * @return $this
      */
@@ -141,9 +142,10 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the customer information for the invoice
+     * Set the customer information for the invoice.
      *
      * @param string $date
+     *
      * @return $this
      */
     public function date($date)
@@ -154,9 +156,10 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the shipping cost
+     * Set the shipping cost.
      *
      * @param string|int $shipping
+     *
      * @return $this
      */
     public function shipping($shipping)
@@ -167,9 +170,10 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the tax percentage
+     * Set the tax percentage.
      *
      * @param string|int $percent
+     *
      * @return $this
      */
     public function tax($percent)
@@ -182,12 +186,13 @@ class InvoiceMailable extends Mailable
     /**
      * Add a line of text to the message.
      *
-     * @param  string|array $line
+     * @param string|array $line
+     *
      * @return $this
      */
     public function line($line)
     {
-        if (! $this->items) {
+        if (!$this->items) {
             $this->introLines[] = $this->formatLine($line);
         } else {
             $this->outroLines[] = $this->formatLine($line);
