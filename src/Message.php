@@ -32,7 +32,8 @@ trait Message
     /**
      * Set the greeting of the message.
      *
-     * @param  string $greeting
+     * @param string $greeting
+     *
      * @return $this
      */
     public function greeting($greeting)
@@ -45,7 +46,8 @@ trait Message
     /**
      * Add a line of text to the message.
      *
-     * @param  string|array $line
+     * @param string|array $line
+     *
      * @return $this
      */
     public function line($line)
@@ -58,7 +60,8 @@ trait Message
     /**
      * Format the given line of text.
      *
-     * @param  string|array $line
+     * @param string|array $line
+     *
      * @return $this
      */
     protected function formatLine($line)
