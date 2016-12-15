@@ -11,18 +11,11 @@ class InvoiceMailable extends Mailable
     use Message;
 
     /**
-     * The view to use for the message.
+     * The Markdown template for the message.
      *
      * @var string
      */
-    public $view = 'tuxedo::templates.invoice';
-
-    /**
-     * The plain text view to use for the message.
-     *
-     * @var string
-     */
-    protected $textView = 'tuxedo::templates.invoice-plain';
+    public $markdown = 'tuxedo::html.invoice';
 
     /**
      * The total amount of tax
