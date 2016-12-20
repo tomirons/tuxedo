@@ -6,7 +6,7 @@
                     <td class="attribute-list-item"><strong>Amount Due:</strong> ${{ number_format($total, 2, '.', ',') }}</td>
                 </tr>
                 <tr>
-                    <td class="attribute-list-item"><strong>Due By:</strong> {{ $due }}</td>
+                    <td class="attribute-list-item"><strong>Due By:</strong> {{ $dueDate }}</td>
                 </tr>
             </table>
         </td>
