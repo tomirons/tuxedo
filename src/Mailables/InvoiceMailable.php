@@ -2,9 +2,11 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Collection;
 use TomIrons\Tuxedo\Message;
+use TomIrons\Tuxedo\TuxedoInvoice;
 
 class InvoiceMailable extends Mailable
 {
@@ -15,52 +17,66 @@ class InvoiceMailable extends Mailable
      *
      * @var string
      */
-    public $markdown = 'tuxedo::html.invoice';
+    public $markdown = 'tuxedo::templates.invoice';
 
     /**
-     * The total amount of tax
+     * ID of the invoice.
+     * 
+     * @var int
+     */
+    public $id;
+
+    /**
+     * The total amount of tax.
      *
      * @var string|int
      */
     public $tax;
 
     /**
-     * The tax percentage
+     * The tax percentage.
      *
      * @var string|int
      */
     public $taxPercent;
 
     /**
-     * The cost of shipping
+     * The cost of shipping.
      *
      * @var string|int
      */
     public $shipping;
 
     /**
-     * The invoice date
+     * The invoice date.
      *
      * @var string
      */
     public $date;
 
     /**
-     * The total before tax and shipping
+     * The date the invoice is due.
+     *
+     * @var string
+     */
+    public $dueDate;
+
+    /**
+     * The total before tax and shipping.
      *
      * @var string|int
      */
     public $subtotal;
 
     /**
-     * The invoice total
+     * The invoice total.
      *
      * @var string|int
      */
     public $total;
 
     /**
-     * The items that are on the invoice
+     * The items that are on the invoice.
      *
      * @var Collection
      */
@@ -81,7 +97,20 @@ class InvoiceMailable extends Mailable
     protected $priceKey = 'product_price';
 
     /**
-     * Add multiple item's to the invoice
+     * Set the id of the invoice.
+     * 
+     * @param $id
+     * @return $this
+     */
+    public function id($id)
+    {
+        $this->id = $id;
+        
+        return $this;
+    }
+    
+    /**
+     * Add multiple item's to the invoice.
      *
      * @param Collection|array $items
      * @return $this
@@ -100,7 +129,7 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Add an item to the invoice
+     * Add an item to the invoice.
      *
      * @param string $name
      * @param string|int $price
@@ -118,7 +147,20 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Calculate the subtotal, tax, and total
+     * Set the due date for the invoice.
+     *
+     * @param string $date
+     * @return $this
+     */
+    public function due($date)
+    {
+        $this->dueDate = $date;
+        
+        return $this;
+    }
+
+    /**
+     * Calculate the subtotal, tax, and total.
      *
      * @return $this
      */
@@ -134,7 +176,7 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the customer information for the invoice
+     * Set the customer information for the invoice.
      *
      * @param string $date
      * @return $this
@@ -147,7 +189,7 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the shipping cost
+     * Set the shipping cost.
      *
      * @param string|int $shipping
      * @return $this
@@ -160,7 +202,7 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the tax percentage
+     * Set the tax percentage.
      *
      * @param string|int $percent
      * @return $this
