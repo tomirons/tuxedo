@@ -10,8 +10,6 @@ use TomIrons\Tuxedo\TuxedoInvoice;
 
 class InvoiceMailable extends Mailable
 {
-    use Message;
-
     /**
      * The Markdown template for the message.
      *
@@ -160,22 +158,6 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Calculate the subtotal, tax, and total.
-     *
-     * @return $this
-     */
-    public function calculate()
-    {
-        $this->subtotal = $this->items->sum('product_price');
-
-        $this->tax = $this->subtotal * ($this->taxPercent / 100);
-
-        $this->total = $this->subtotal + $this->tax + $this->shipping;
-
-        return $this;
-    }
-
-    /**
      * Set the customer information for the invoice.
      *
      * @param string $date
@@ -215,18 +197,17 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Add a line of text to the message.
+     * Calculate the subtotal, tax, and total.
      *
-     * @param  string|array $line
      * @return $this
      */
-    public function line($line)
+    public function calculate()
     {
-        if (! $this->items) {
-            $this->introLines[] = $this->formatLine($line);
-        } else {
-            $this->outroLines[] = $this->formatLine($line);
-        }
+        $this->subtotal = $this->items->sum('product_price');
+
+        $this->tax = $this->subtotal * ($this->taxPercent / 100);
+
+        $this->total = $this->subtotal + $this->tax + $this->shipping;
 
         return $this;
     }
