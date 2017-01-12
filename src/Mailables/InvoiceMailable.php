@@ -46,13 +46,6 @@ class InvoiceMailable extends Mailable
     public $shipping;
 
     /**
-     * The invoice date.
-     *
-     * @var string
-     */
-    public $date;
-
-    /**
      * The date the invoice is due.
      *
      * @var string
@@ -154,19 +147,6 @@ class InvoiceMailable extends Mailable
     {
         $this->dueDate = $date;
         
-        return $this;
-    }
-
-    /**
-     * Set the customer information for the invoice.
-     *
-     * @param string $date
-     * @return $this
-     */
-    public function date($date)
-    {
-        $this->date = $date;
-
         return $this;
     }
 
