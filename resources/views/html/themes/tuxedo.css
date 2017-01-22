@@ -405,14 +405,19 @@ p.sub {
     border-top: 1px solid #EDEFF2;
 }
 
-.purchase_total {
+.purchase_total, .purchase_tax, .purchase_shipping {
     margin: 0;
     text-align: right;
     font-weight: bold;
     color: #2F3133;
 }
 
-.purchase_total--label {
+.purchase_tax, .purchase_shipping {
+    font-weight: normal;
+    color: #87898b;
+}
+
+.purchase_total--label, .purchase_tax--label, .purchase_shipping--label {
     padding: 0 15px 0 0;
 }
 
