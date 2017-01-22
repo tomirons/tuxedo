@@ -1,9 +1,9 @@
 <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
     <tr>
         <td>
-            <h3>{{ $invoice->id }}</h3></td>
+            <h3>{{ $data['id'] }}</h3></td>
         <td>
-            <h3 class="align-right">{{ date('') }}</h3></td>
+            <h3 class="align-right">{{ $data['date'] }}</h3></td>
     </tr>
     <tr>
         <td colspan="2">
@@ -16,18 +16,38 @@
                         <p class="align-right">Amount</p>
                     </th>
                 </tr>
-                {{#each invoice_details}}
-                <tr>
-                    <td width="80%" class="purchase_item">{{description}}</td>
-                    <td class="align-right" width="20%" class="purchase_item">{{amount}}</td>
-                </tr>
-                {{/each}}
+                @foreach($data['items'] as $item)
+                    <tr>
+                        <td width="80%" class="purchase_item">{{ $item[$data['keys']['name']] }}</td>
+                        <td class="align-right" width="20%" class="purchase_item">{{ $item[$data['keys']['price']] }}</td>
+                    </tr>
+                @endforeach
+                @if ($data['shipping'])
+                    <tr>
+                        <td width="80%" class="purchase_footer" valign="middle">
+                            <p class="purchase_total purchase_total--label">Shipping</p>
+                        </td>
+                        <td width="20%" class="purchase_footer" valign="middle">
+                            <p class="purchase_total">{{ $data['shipping'] }}</p>
+                        </td>
+                    </tr>
+                @endif
+                @if ($data['tax'])
+                    <tr>
+                        <td width="80%" class="purchase_footer" valign="middle">
+                            <p class="purchase_total purchase_total--label">Tax</p>
+                        </td>
+                        <td width="20%" class="purchase_footer" valign="middle">
+                            <p class="purchase_total">{{ $data['tax'] }}</p>
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td width="80%" class="purchase_footer" valign="middle">
                         <p class="purchase_total purchase_total--label">Total</p>
                     </td>
                     <td width="20%" class="purchase_footer" valign="middle">
-                        <p class="purchase_total">{{total}}</p>
+                        <p class="purchase_total">{{ $data['total'] }}</p>
                     </td>
                 </tr>
             </table>
