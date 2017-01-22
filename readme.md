@@ -136,15 +136,16 @@ class TuxedoTestMail extends AlertMailable
 ### InvoiceMailable
 
 #### Properties
-- `$nameKey` - Set the key used to find the product name when using `items()`. Defaults to `product_name`.
-- `$priceKey` - Set the key used to find the product price when using `items()`. Defaults to `product_price`.
+- `$keys|array` - Set which keys to use when looking for an item's name and price. Defaults to `['name' => 'product_name', 'price' => 'product_price']`
 
 #### Methods
+- `id($id)` - Sets the invoice ID.
+- `name($name)` - Sets the name to begin the invoice with.
 - `date($date)` - Sets the date to display at the top of the invoice table.
+- `due($date)` - Sets the due date of the invoice.
+- `url($url)` - Sets the URL to pay the invoice.
 - `items($items)` - Add an list of items to the invoice. Acceptable variable types are `Collection` and `array`.
-- `tax($percentage)` - Set the tax percentage to use for the invoice.
-- `shipping($shipping)` - Set the cost of shipping for the invoice.
-- `calculate()` - Calculates the tax and final total, **MUST** be the last method called.
+- `calculate($taxPercent, $shipping)` - Calculates the tax and final total, **MUST** be the last method called.
 
 #### Example
 ````php
@@ -152,15 +153,17 @@ class TuxedoTestMail extends AlertMailable
 
 namespace App\Mail;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\InvoiceMailable;
 
-class TuxedoTestMail extends InvoiceMailable 
+class InvoiceMail extends InvoiceMailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * Create a new message instance.
      *
@@ -174,19 +177,23 @@ class TuxedoTestMail extends InvoiceMailable
     /**
      * Build the message.
      *
+     * @return $this
      */
     public function build()
     {
-        return $this->date(date('l, M j Y \a\t g:i a'))
+        return $this->id(123456)
+                    ->name('John Doe')
+                    ->date(Carbon::now()->format('l, M j Y \a\t g:i a'))
+                    ->due(Carbon::now()->addDays(7)->format('l, M j Y \a\t g:i a'))
+                    ->url('https://laravel.com')
                     ->items([
                         ['product_name' => 'Example Product', 'product_price' => 123.99],
                         ['product_name' => 'Second Product', 'product_price' => 321.99]
                     ])
-                    ->tax(3)
-                    ->shipping(15)
-                    ->calculate();
+                    ->calculate(3, 15);
     }
 }
+
 ````
 
 ## License
