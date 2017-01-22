@@ -19,31 +19,24 @@ class InvoiceMailable extends Mailable
 
     /**
      * ID of the invoice.
-     * 
+     *
      * @var int
      */
     public $id;
 
     /**
-     * The total amount of tax.
+     * The user's name.
      *
-     * @var string|int
+     * @var string
      */
-    public $tax;
+    public $name;
 
     /**
-     * The tax percentage.
+     * The invoice date.
      *
-     * @var string|int
+     * @var string
      */
-    public $taxPercent;
-
-    /**
-     * The cost of shipping.
-     *
-     * @var string|int
-     */
-    public $shipping;
+    public $date;
 
     /**
      * The date the invoice is due.
@@ -53,16 +46,23 @@ class InvoiceMailable extends Mailable
     public $dueDate;
 
     /**
-     * The total before tax and shipping.
+     * The cost of shipping.
      *
-     * @var string|int
+     * @var int
      */
-    public $subtotal;
+    public $shipping;
+
+    /**
+     * The cost of tax.
+     *
+     * @var int
+     */
+    public $tax;
 
     /**
      * The invoice total.
      *
-     * @var string|int
+     * @var int
      */
     public $total;
 
@@ -74,32 +74,44 @@ class InvoiceMailable extends Mailable
     public $items;
 
     /**
-     * The column to find the name of a product.
-     *
-     * @var string
+     * The keys to use when data needs retrieved.
+     * @var array
      */
-    protected $nameKey = 'product_name';
+    public $keys = ['name' => 'product_name', 'price' => 'product_price'];
 
     /**
-     * The column to find the price of a product.
+     * Information to display in the table.
      *
-     * @var string
+     * @var array
      */
-    protected $priceKey = 'product_price';
+    public $tableData;
 
     /**
      * Set the id of the invoice.
-     * 
+     *
      * @param $id
      * @return $this
      */
     public function id($id)
     {
         $this->id = $id;
-        
+
         return $this;
     }
-    
+
+    /**
+     * Set the name of the user.
+     *
+     * @param $name
+     * @return $this
+     */
+    public function name($name)
+    {
+        $this->namez = $name;
+
+        return $this;
+    }
+
     /**
      * Add multiple item's to the invoice.
      *
@@ -108,12 +120,12 @@ class InvoiceMailable extends Mailable
      */
     public function items($items)
     {
-        if (! $items instanceof Collection) {
+        if (!$items instanceof Collection) {
             $items = collect($items);
         }
 
         foreach ($items as $item) {
-            $this->item($item[$this->nameKey], $item[$this->priceKey]);
+            $this->item($item[$this->keys['name']], $item[$this->keys['price']]);
         }
 
         return $this;
@@ -127,7 +139,7 @@ class InvoiceMailable extends Mailable
      */
     private function item($name, $price)
     {
-        if (! $this->items instanceof Collection) {
+        if (!$this->items instanceof Collection) {
             $this->items = new Collection;
         }
 
@@ -146,32 +158,19 @@ class InvoiceMailable extends Mailable
     public function due($date)
     {
         $this->dueDate = $date;
-        
-        return $this;
-    }
-
-    /**
-     * Set the shipping cost.
-     *
-     * @param string|int $shipping
-     * @return $this
-     */
-    public function shipping($shipping)
-    {
-        $this->shipping = $shipping;
 
         return $this;
     }
 
     /**
-     * Set the tax percentage.
+     * Set the customer information for the invoice.
      *
-     * @param string|int $percent
+     * @param string $date
      * @return $this
      */
-    public function tax($percent)
+    public function date($date)
     {
-        $this->taxPercent = $percent;
+        $this->date = $date;
 
         return $this;
     }
@@ -181,13 +180,35 @@ class InvoiceMailable extends Mailable
      *
      * @return $this
      */
-    public function calculate()
+    public function calculate($taxPercent, $shipping = 0)
     {
-        $this->subtotal = $this->items->sum('product_price');
+        $subtotal = $this->items->sum('product_price');
 
-        $this->tax = $this->subtotal * ($this->taxPercent / 100);
+        $this->tax = $subtotal * ($taxPercent / 100);
 
-        $this->total = $this->subtotal + $this->tax + $this->shipping;
+        $this->shipping = $shipping;
+
+        $this->total = $subtotal + $this->tax + $this->shipping;
+
+        $this->dataToArray();
+    }
+
+    /**
+     * Set the data to use in the table.
+     *
+     * @return $this
+     */
+    private function dataToArray()
+    {
+        $this->tableData = [
+            'id' => $this->id,
+            'date' => $this->date,
+            'items' => $this->items,
+            'shipping' => number_format($this->shipping, 2),
+            'tax' => number_format($this->tax, 2),
+            'total' => number_format($this->total, 2),
+            'keys' => $this->keys
+        ];
 
         return $this;
     }
