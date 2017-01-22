@@ -4,7 +4,7 @@
 
 Thanks for using {{ config('app.name') }}. This is an invoice for your recent purchase.
 
-@component('mail::invoice.attributes', ['total' => $total, 'dueDate' => $dueDate])
+@component('mail::invoice.attributes', ['total' => $tableData['total'], 'dueDate' => $dueDate])
 
 @endcomponent
 
