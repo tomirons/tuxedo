@@ -136,7 +136,7 @@ class TuxedoTestMail extends AlertMailable
 ### InvoiceMailable
 
 #### Properties
-- `$keys|array` - Set which keys to use when looking for an item's name and price. Defaults to `['name' => 'product_name', 'price' => 'product_price']`
+- `$keys|array` - Set which keys to use when looking for an item's name and price.
 
 #### Methods
 - `id($id)` - Sets the invoice ID.
