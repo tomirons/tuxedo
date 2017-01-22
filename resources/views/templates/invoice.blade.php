@@ -16,4 +16,7 @@ Pay this invoice
 
 @endcomponent
 
+Regards, <br>
+{{ config('app.name') }}
+
 @endcomponent
