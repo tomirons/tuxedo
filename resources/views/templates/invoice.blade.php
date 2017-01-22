@@ -8,9 +8,11 @@ Thanks for using {{ config('app.name') }}. This is an invoice for your recent pu
 
 @endcomponent
 
-@component('mail::button', ['url' => 'http://laravel.com', 'color' => 'green'])
-Pay this invoice
-@endcomponent
+@if ($url)
+    @component('mail::button', ['url' => $url, 'color' => 'green'])
+    Pay this invoice
+    @endcomponent
+@endif
 
 @component('mail::invoice.table', ['data' => $tableData])
 

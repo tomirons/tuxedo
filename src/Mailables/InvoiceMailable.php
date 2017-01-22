@@ -32,6 +32,13 @@ class InvoiceMailable extends Mailable
     public $name;
 
     /**
+     * The URL to pay the invoice.
+     *
+     * @var string
+     */
+    public $url;
+
+    /**
      * The invoice date.
      *
      * @var string
@@ -113,6 +120,19 @@ class InvoiceMailable extends Mailable
     }
 
     /**
+     * Set the URL of the invoice.
+     *
+     * @param $url
+     * @return $this
+     */
+    public function url($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
      * Add multiple item's to the invoice.
      *
      * @param Collection|array $items
@@ -180,7 +200,7 @@ class InvoiceMailable extends Mailable
      *
      * @return $this
      */
-    public function calculate($taxPercent, $shipping = 0)
+    public function calculate($taxPercent = 0, $shipping = 0)
     {
         $subtotal = $this->items->sum('product_price');
 
@@ -204,8 +224,8 @@ class InvoiceMailable extends Mailable
             'id' => $this->id,
             'date' => $this->date,
             'items' => $this->items,
-            'shipping' => number_format($this->shipping, 2),
-            'tax' => number_format($this->tax, 2),
+            'shipping' => $this->shipping ? number_format($this->shipping, 2) : null,
+            'tax' => $this->tax ? number_format($this->tax, 2) : null,
             'total' => number_format($this->total, 2),
             'keys' => $this->keys
         ];
