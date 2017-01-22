@@ -19,4 +19,10 @@ Pay this invoice
 Regards, <br>
 {{ config('app.name') }}
 
+@component('mail::subcopy')
+If you’re having trouble with the button above, copy and paste the URL below into your web browser.
+
+{{ $url }}
+@endcomponent
+
 @endcomponent
