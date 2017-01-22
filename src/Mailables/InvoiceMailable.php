@@ -2,11 +2,9 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Collection;
 use TomIrons\Tuxedo\Message;
-use TomIrons\Tuxedo\TuxedoInvoice;
 
 class InvoiceMailable extends Mailable
 {
@@ -75,6 +73,7 @@ class InvoiceMailable extends Mailable
 
     /**
      * The keys to use when data needs retrieved.
+     *
      * @var array
      */
     public $keys = ['name' => 'product_name', 'price' => 'product_price'];
@@ -90,6 +89,7 @@ class InvoiceMailable extends Mailable
      * Set the id of the invoice.
      *
      * @param $id
+     *
      * @return $this
      */
     public function id($id)
@@ -103,6 +103,7 @@ class InvoiceMailable extends Mailable
      * Set the name of the user.
      *
      * @param $name
+     *
      * @return $this
      */
     public function name($name)
@@ -116,6 +117,7 @@ class InvoiceMailable extends Mailable
      * Add multiple item's to the invoice.
      *
      * @param Collection|array $items
+     *
      * @return $this
      */
     public function items($items)
@@ -134,18 +136,18 @@ class InvoiceMailable extends Mailable
     /**
      * Add an item to the invoice.
      *
-     * @param string $name
+     * @param string     $name
      * @param string|int $price
      */
     private function item($name, $price)
     {
         if (!$this->items instanceof Collection) {
-            $this->items = new Collection;
+            $this->items = new Collection();
         }
 
         $this->items->push([
-            'product_name' => $name,
-            'product_price' => $price
+            'product_name'  => $name,
+            'product_price' => $price,
         ]);
     }
 
@@ -153,6 +155,7 @@ class InvoiceMailable extends Mailable
      * Set the due date for the invoice.
      *
      * @param string $date
+     *
      * @return $this
      */
     public function due($date)
@@ -166,6 +169,7 @@ class InvoiceMailable extends Mailable
      * Set the customer information for the invoice.
      *
      * @param string $date
+     *
      * @return $this
      */
     public function date($date)
@@ -201,13 +205,13 @@ class InvoiceMailable extends Mailable
     private function dataToArray()
     {
         $this->tableData = [
-            'id' => $this->id,
-            'date' => $this->date,
-            'items' => $this->items,
+            'id'       => $this->id,
+            'date'     => $this->date,
+            'items'    => $this->items,
             'shipping' => number_format($this->shipping, 2),
-            'tax' => number_format($this->tax, 2),
-            'total' => number_format($this->total, 2),
-            'keys' => $this->keys
+            'tax'      => number_format($this->tax, 2),
+            'total'    => number_format($this->total, 2),
+            'keys'     => $this->keys,
         ];
 
         return $this;
