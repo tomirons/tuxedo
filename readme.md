@@ -43,11 +43,11 @@ There are currently 3 different types of classes you can extend. `ActionMailable
 ### ActionMailable
 
 #### Methods
-- `header($header)` - Sets the header text for the message, it'll only be displayed if it's set.
-- `level($level)` - Sets the level type of the button. Available options are `success` and `error`.
+- `header($header)` - Sets the header text for the message. Defaults to `Hello!`
+- `color($color)` - Sets the color of the button. Available options are `blue`, `green`, and `red`.
 - `action($text, $url)` - Sets the button text and url.
-- `success()` - Sets the level type to `success`.
-- `error()` - Sets the level type to `error`.
+- `success()` - Sets the button color to `green`.
+- `error()` - Sets the button color to `red`.
   
 #### Example
 ````php
@@ -81,7 +81,7 @@ class TuxedoTestMail extends ActionMailable
     public function build()
     {
         return $this->header('Some Random Header')
-                    ->level('success')
+                    ->success()
                     ->line('Some line of text to tell you what exactly is going on.')
                     ->action('Click Me', url('/'))
                     ->line('Some other information to be displayed after the button.');
