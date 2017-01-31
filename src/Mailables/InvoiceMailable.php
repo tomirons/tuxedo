@@ -114,7 +114,7 @@ class InvoiceMailable extends Mailable
      */
     public function name($name)
     {
-        $this->namez = $name;
+        $this->name = $name;
 
         return $this;
     }
