@@ -17,18 +17,18 @@ class ActionMailable extends Mailable
     public $markdown = 'tuxedo::templates.action';
 
     /**
-     * The "level" of the message (info, success, error).
+     * The color of the button (blue, green, red).
      *
      * @var string
      */
-    public $level = 'info';
+    public $color = 'blue';
 
     /**
      * The header for the message.
      *
      * @var string|null
      */
-    public $header = null;
+    public $header = 'Hello!';
 
     /**
      * The text / label for the action.
@@ -51,7 +51,7 @@ class ActionMailable extends Mailable
      */
     public function success()
     {
-        $this->level = 'success';
+        $this->color = 'green';
 
         return $this;
     }
@@ -63,20 +63,20 @@ class ActionMailable extends Mailable
      */
     public function error()
     {
-        $this->level = 'error';
+        $this->color = 'red';
 
         return $this;
     }
 
     /**
-     * Set the "level" of the message (success, error, etc.).
+     * Set the color of the message (blue, green, red).
      *
      * @param  string $level
      * @return $this
      */
-    public function level($level)
+    public function color($color)
     {
-        $this->level = $level;
+        $this->color = $color;
 
         return $this;
     }
