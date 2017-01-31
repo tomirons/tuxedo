@@ -10,18 +10,11 @@ class AlertMailable extends Mailable
     use Message;
 
     /**
-     * The view to use for the message.
+     * The Markdown template for the message.
      *
      * @var string
      */
-    protected $view = 'tuxedo::templates.alert';
-
-    /**
-     * The plain text view to use for the message.
-     *
-     * @var string
-     */
-    protected $textView = 'tuxedo::templates.alert-plain';
+    public $markdown = 'tuxedo::templates.alert';
 
     /**
      * The type of alert.
