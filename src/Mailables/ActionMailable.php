@@ -10,18 +10,11 @@ class ActionMailable extends Mailable
     use Message;
 
     /**
-     * The view to use for the message.
+     * The Markdown template for the message.
      *
      * @var string
      */
-    protected $view = 'tuxedo::templates.action';
-
-    /**
-     * The plain text view to use for the message.
-     *
-     * @var string
-     */
-    protected $textView = 'tuxedo::templates.action-plain';
+    public $markdown = 'tuxedo::templates.action';
 
     /**
      * The "level" of the message (info, success, error).
