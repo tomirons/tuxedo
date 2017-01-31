@@ -265,19 +265,25 @@ p.sub {
     padding: 0;
 }
 
-.alert.alert-info {
+.alert-item p:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    color: #fff;
+}
+
+.alert-info {
     background-color: #3097D1;
 }
 
-.alert.alert-warning {
+.alert-warning {
     background-color: #bf9d31;
 }
 
-.alert.alert-success {
+.alert-success {
     background-color: #2ab27b;
 }
 
-.alert.alert-success {
+.alert-success {
     background-color: #bf5329;
 }
 
