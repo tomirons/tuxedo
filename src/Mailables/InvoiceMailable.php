@@ -9,7 +9,7 @@ use TomIrons\Tuxedo\Message;
 class InvoiceMailable extends Mailable
 {
     /**
-     * The Markdown template for the message.
+     * The Markdown template for the message (if applicable).
      *
      * @var string
      */

@@ -10,7 +10,7 @@ class AlertMailable extends Mailable
     use Message;
 
     /**
-     * The Markdown template for the message.
+     * The Markdown template for the message (if applicable).
      *
      * @var string
      */
