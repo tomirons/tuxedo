@@ -2,8 +2,8 @@
 
 namespace TomIrons\Tuxedo;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Mail\Markdown;
+use Illuminate\Support\ServiceProvider;
 
 class TuxedoServiceProvider extends ServiceProvider
 {
@@ -14,11 +14,11 @@ class TuxedoServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tuxedo');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tuxedo');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/tuxedo'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/tuxedo'),
             ], 'tuxedo');
         }
 
@@ -27,12 +27,12 @@ class TuxedoServiceProvider extends ServiceProvider
 
     /**
      * Modify the markdown configuration.
-     * 
+     *
      * @return void
      */
     public function alterConfiguration()
     {
         config()->set('mail.markdown.theme', 'tuxedo');
-        config()->set('mail.markdown.paths', array_merge([__DIR__ . '/../resources/views'], config('mail.markdown.paths')));
+        config()->set('mail.markdown.paths', array_merge([__DIR__.'/../resources/views'], config('mail.markdown.paths')));
     }
 }

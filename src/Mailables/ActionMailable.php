@@ -64,7 +64,8 @@ class ActionMailable extends Mailable
     /**
      * Set the color of the message (blue, green, red).
      *
-     * @param  string $level
+     * @param string $level
+     *
      * @return $this
      */
     public function color($color)
@@ -77,8 +78,9 @@ class ActionMailable extends Mailable
     /**
      * Configure the "call to action" button.
      *
-     * @param  string $text
-     * @param  string $url
+     * @param string $text
+     * @param string $url
+     *
      * @return $this
      */
     public function action($text, $url)
@@ -92,12 +94,13 @@ class ActionMailable extends Mailable
     /**
      * Add a line of text to the message.
      *
-     * @param  string|array $line
+     * @param string|array $line
+     *
      * @return $this
      */
     public function line($line)
     {
-        if (! $this->actionText) {
+        if (!$this->actionText) {
             $this->introLines[] = $this->formatLine($line);
         } else {
             $this->outroLines[] = $this->formatLine($line);
