@@ -44,7 +44,6 @@ These methods are currently only available in `ActionMailable` and `AlertMailabl
 ### ActionMailable
 
 #### Methods
-- `header($header)` - Sets the header text for the message. Defaults to `Hello!`
 - `color($color)` - Sets the color of the button. Available options are `blue`, `green`, and `red`.
 - `action($text, $url)` - Sets the button text and url.
 - `success()` - Sets the button color to `green`.
@@ -81,8 +80,7 @@ class TuxedoTestMail extends ActionMailable
      */
     public function build()
     {
-        return $this->header('Some Random Header')
-                    ->success()
+        return $this->success()
                     ->line('Some line of text to tell you what exactly is going on.')
                     ->action('Click Me', url('/'))
                     ->line('Some other information to be displayed after the button.');
