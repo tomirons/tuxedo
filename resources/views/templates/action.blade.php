@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# {{ $header }}
+# {{ $greeting }}
 
 @foreach($introLines as $line)
 {{ $line }}

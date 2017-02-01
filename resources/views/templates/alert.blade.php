@@ -4,6 +4,8 @@
 {{ $text }}
 @endcomponent
 
+# {{ $greeting }}
+
 @foreach($outroLines as $line)
 {{ $line }}
 @endforeach
