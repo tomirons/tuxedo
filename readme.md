@@ -80,7 +80,8 @@ class TuxedoTestMail extends ActionMailable
      */
     public function build()
     {
-        return $this->success()
+        return $this->greeting('Hello!')
+                    ->success()
                     ->line('Some line of text to tell you what exactly is going on.')
                     ->action('Click Me', url('/'))
                     ->line('Some other information to be displayed after the button.');
@@ -129,8 +130,9 @@ class TuxedoTestMail extends AlertMailable
      */
     public function build()
     {
-        return $this->type('success')
-                    ->message('A message that goes inside the alert.')
+        return $this->greeting('Hello!')
+                    ->error()
+                    ->message('Something has gone wrong, please contact support.')
                     ->line('Some line of text to tell you what exactly is going on.');
     }
 }
