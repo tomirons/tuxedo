@@ -24,13 +24,6 @@ class ActionMailable extends Mailable
     public $color = 'blue';
 
     /**
-     * The header for the message.
-     *
-     * @var string|null
-     */
-    public $header = 'Hello!';
-
-    /**
      * The text / label for the action.
      *
      * @var string
@@ -77,19 +70,6 @@ class ActionMailable extends Mailable
     public function color($color)
     {
         $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * Set the header for the message
-     *
-     * @param string $header
-     * @return $this
-     */
-    public function header($header)
-    {
-        $this->header = $header;
 
         return $this;
     }
