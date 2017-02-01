@@ -1,1 +1,1 @@
-{{ $slot }}
+{{ Illuminate\Mail\Markdown::parse($slot) }}
