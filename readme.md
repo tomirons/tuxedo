@@ -37,17 +37,17 @@ php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
 
 #### General Methods
+These methods are currently only available in `ActionMailable` and `AlertMailable`.
 - `gretting($gretting)` - Sets the greeting for the message.
 - `line($line)` - Add a line of text to the message.
   
 ### ActionMailable
 
 #### Methods
-- `header($header)` - Sets the header text for the message, it'll only be displayed if it's set.
-- `level($level)` - Sets the level type of the button. Available options are `success` and `error`.
+- `color($color)` - Sets the color of the button. Available options are `blue`, `green`, and `red`.
 - `action($text, $url)` - Sets the button text and url.
-- `success()` - Sets the level type to `success`.
-- `error()` - Sets the level type to `error`.
+- `success()` - Sets the button color to `green`.
+- `error()` - Sets the button color to `red`.
   
 #### Example
 ````php
@@ -80,8 +80,8 @@ class TuxedoTestMail extends ActionMailable
      */
     public function build()
     {
-        return $this->header('Some Random Header')
-                    ->level('success')
+        return $this->greeting('Hello!')
+                    ->success()
                     ->line('Some line of text to tell you what exactly is going on.')
                     ->action('Click Me', url('/'))
                     ->line('Some other information to be displayed after the button.');
@@ -92,7 +92,11 @@ class TuxedoTestMail extends ActionMailable
 ### AlertMailable
 
 #### Methods
-- `type($type)` - Sets the type of alert, options are `success`, `warning`, and `error`.
+- `info()` - Sets the type of the alert to `info`.
+- `warning()` - Sets the type of the alert to `warning`.
+- `success()` - Sets the type of the alert to `success`.
+- `error()` - Sets the type of the alert to `error`.
+- `type($type)` - Sets the type of alert, options are `info`, `success`, `warning`, and `error`.
 - `message($message)` - Sets the message to display in the alert.
 
 #### Example
@@ -126,8 +130,9 @@ class TuxedoTestMail extends AlertMailable
      */
     public function build()
     {
-        return $this->type('success')
-                    ->message('A message that goes inside the alert.')
+        return $this->greeting('Hello!')
+                    ->error()
+                    ->message('Something has gone wrong, please contact support.')
                     ->line('Some line of text to tell you what exactly is going on.');
     }
 }
@@ -136,15 +141,16 @@ class TuxedoTestMail extends AlertMailable
 ### InvoiceMailable
 
 #### Properties
-- `$nameKey` - Set the key used to find the product name when using `items()`. Defaults to `product_name`.
-- `$priceKey` - Set the key used to find the product price when using `items()`. Defaults to `product_price`.
+- `$keys|array` - Set which keys to use when looking for an item's name and price.
 
 #### Methods
+- `id($id)` - Sets the invoice ID.
+- `name($name)` - Sets the name to begin the invoice with.
 - `date($date)` - Sets the date to display at the top of the invoice table.
+- `due($date)` - Sets the due date of the invoice.
+- `url($url)` - Sets the URL to pay the invoice.
 - `items($items)` - Add an list of items to the invoice. Acceptable variable types are `Collection` and `array`.
-- `tax($percentage)` - Set the tax percentage to use for the invoice.
-- `shipping($shipping)` - Set the cost of shipping for the invoice.
-- `calculate()` - Calculates the tax and final total, **MUST** be the last method called.
+- `calculate($taxPercent, $shipping)` - Calculates the tax and final total, **MUST** be the last method called.
 
 #### Example
 ````php
@@ -152,15 +158,17 @@ class TuxedoTestMail extends AlertMailable
 
 namespace App\Mail;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\InvoiceMailable;
 
-class TuxedoTestMail extends InvoiceMailable 
+class InvoiceMail extends InvoiceMailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * Create a new message instance.
      *
@@ -174,19 +182,23 @@ class TuxedoTestMail extends InvoiceMailable
     /**
      * Build the message.
      *
+     * @return $this
      */
     public function build()
     {
-        return $this->date(date('l, M j Y \a\t g:i a'))
+        return $this->id(123456)
+                    ->name('John Doe')
+                    ->date(Carbon::now()->format('l, M j Y \a\t g:i a'))
+                    ->due(Carbon::now()->addDays(7)->format('l, M j Y \a\t g:i a'))
+                    ->url('https://laravel.com')
                     ->items([
                         ['product_name' => 'Example Product', 'product_price' => 123.99],
                         ['product_name' => 'Second Product', 'product_price' => 321.99]
                     ])
-                    ->tax(3)
-                    ->shipping(15)
-                    ->calculate();
+                    ->calculate(3, 15);
     }
 }
+
 ````
 
 ## License

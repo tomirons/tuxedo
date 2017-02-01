@@ -1,52 +1,40 @@
-@extends('tuxedo::master')
+@component('mail::message')
 
-@section('body_header')
-    <h2 style="{{ $style['text-center'] . $style['no-top-margin'] }}">Thank you for your order!</h2>
-@endsection
+# Hi {{ $name }}!
 
-@section('content')
-    <!-- Invoice -->
-    <table style="{{ $style['invoice'] }}">
-        <tr>
-            <td style="{{ $style['invoice--padding'] . $style['text-center'] . $style['invoice-date'] }}">
-                {{ $date }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table style="{{ $style['invoice-items'] }}" cellpadding="0" cellspacing="0">
-                    @foreach ($items as $item)
-                        <tr style="{{ $style['invoice-item'] }}">
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">{{ $item['product_name'] }}</td>
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ $item['product_price'] }}</td>
-                        </tr>
-                    @endforeach
+Thanks for using {{ config('app.name') }}. This is an invoice for your recent purchase.
 
-                    <tr style="{{ $style['invoice-subtotal'] }}">
-                        <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">Subtotal</td>
-                        <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ number_format($subtotal, 2, '.', ',') }}</td>
-                    </tr>
+@component('mail::invoice.attributes', ['total' => $tableData['total'], 'dueDate' => $dueDate])
+# Amount Due: {{ $tableData['total'] }} <br>
+# Due By: {{ $dueDate }}
+@endcomponent
 
-                    @if ($tax > 0)
-                        <tr style="{{ $style['invoice-subtotal'] }}">
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">Tax</td>
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ number_format($tax, 2, '.', ',') }}</td>
-                        </tr>
-                    @endif
+@component('mail::button', ['url' => $url, 'color' => 'green'])
+Pay this invoice
+@endcomponent
 
-                    @if ($shipping)
-                        <tr style="{{ $style['invoice-subtotal'] }}">
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] }}">Shipping</td>
-                            <td style="{{ $style['invoice-items--border'] . $style['invoice--padding'] . $style['text-right'] . $style['invoice-items--price'] }}">$ {{ number_format($shipping, 2, '.', ',') }}</td>
-                        </tr>
-                    @endif
+@component('mail::invoice.table', ['data' => $tableData])
+| Description | Amount |
+| ----------- | ------ |
+@foreach($tableData['items'] as $item)
+| {{ $item[$tableData['keys']['name']] }} | {{ $item[$tableData['keys']['price']] }} |
+@endforeach
+@if ($tableData['shipping'] > 0)
+| Shipping | {{ $tableData['shipping'] }} |
+@endif
+@if ($tableData['tax'] > 0)
+| Tax | {{ $tableData['tax'] }} |
+@endif
+| Total | {{ $tableData['total'] }} |
+@endcomponent
 
-                    <tr>
-                        <td style="{{ $style['invoice--padding'] . $style['invoice-items-total'] }}" width="80%">Total</td>
-                        <td style="{{ $style['text-right'] . $style['invoice--padding'] . $style['invoice-items-total'] }}">$ {{ number_format($total, 2, '.', ',') }}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-@endsection
+Regards, <br>
+{{ config('app.name') }}
+
+@component('mail::subcopy')
+If you’re having trouble with the button above, copy and paste the URL below into your web browser.
+
+{{ $url }}
+@endcomponent
+
+@endcomponent

@@ -1,32 +1,16 @@
-@extends('tuxedo::master')
+@component('mail::message')
 
-@section('alert')
-    <!-- Alert -->
-    <tr>
-        <td style="{{ $fontFamily }} {{ $style['alert'] . $style['alert--'.$type] }}">
-            {{ $text }}
-        </td>
-    </tr>
-@endsection
+@component('mail::alert.box', ['type' => $type])
+{{ $text }}
+@endcomponent
 
-@section('body_footer')
-    <!-- Sub Copy -->
-    @if (isset($actionText))
-        <table style="{{ $style['body_sub'] }}">
-            <tr>
-                <td style="{{ $fontFamily }}">
-                    <p style="{{ $style['paragraph-sub'] }}">
-                        If you’re having trouble clicking the "{{ $actionText }}" button,
-                        copy and paste the URL below into your web browser:
-                    </p>
+# {{ $greeting }}
 
-                    <p style="{{ $style['paragraph-sub'] }}">
-                        <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}" target="_blank">
-                            {{ $actionUrl }}
-                        </a>
-                    </p>
-                </td>
-            </tr>
-        </table>
-    @endif
-@endsection
+@foreach($outroLines as $line)
+{{ $line }}
+@endforeach
+
+Regards, <br>
+{{ config('app.name') }}
+
+@endcomponent

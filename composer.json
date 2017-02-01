@@ -1,6 +1,6 @@
 {
     "name": "tomirons/tuxedo",
-    "description": "Basic transactional mail templates for laravel 5.3",
+    "description": "Basic transactional mail templates for laravel 5.4",
     "license": "MIT",
     "authors": [
         {
@@ -10,9 +10,10 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "illuminate/mail": "^5.3",
-        "illuminate/notifications": "^5.3",
-        "illuminate/support": "^5.3"
+        "illuminate/database": "^5.4",
+        "illuminate/mail": "^5.4",
+        "illuminate/notifications": "^5.4",
+        "illuminate/support": "^5.4"
     },
     "autoload": {
         "psr-4": {

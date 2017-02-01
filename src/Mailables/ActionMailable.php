@@ -10,32 +10,18 @@ class ActionMailable extends Mailable
     use Message;
 
     /**
-     * The view to use for the message.
+     * The Markdown template for the message.
      *
      * @var string
      */
-    protected $view = 'tuxedo::templates.action';
+    public $markdown = 'tuxedo::templates.action';
 
     /**
-     * The plain text view to use for the message.
+     * The color of the button (blue, green, red).
      *
      * @var string
      */
-    protected $textView = 'tuxedo::templates.action-plain';
-
-    /**
-     * The "level" of the message (info, success, error).
-     *
-     * @var string
-     */
-    public $level = 'info';
-
-    /**
-     * The header for the message.
-     *
-     * @var string|null
-     */
-    public $header = null;
+    public $color = 'blue';
 
     /**
      * The text / label for the action.
@@ -58,7 +44,7 @@ class ActionMailable extends Mailable
      */
     public function success()
     {
-        $this->level = 'success';
+        $this->color = 'green';
 
         return $this;
     }
@@ -70,35 +56,20 @@ class ActionMailable extends Mailable
      */
     public function error()
     {
-        $this->level = 'error';
+        $this->color = 'red';
 
         return $this;
     }
 
     /**
-     * Set the "level" of the message (success, error, etc.).
+     * Set the color of the message (blue, green, red).
      *
-     * @param string $level
-     *
+     * @param  string $level
      * @return $this
      */
-    public function level($level)
+    public function color($color)
     {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Set the header for the message.
-     *
-     * @param string $header
-     *
-     * @return $this
-     */
-    public function header($header)
-    {
-        $this->header = $header;
+        $this->color = $color;
 
         return $this;
     }
@@ -106,9 +77,8 @@ class ActionMailable extends Mailable
     /**
      * Configure the "call to action" button.
      *
-     * @param string $text
-     * @param string $url
-     *
+     * @param  string $text
+     * @param  string $url
      * @return $this
      */
     public function action($text, $url)
@@ -122,13 +92,12 @@ class ActionMailable extends Mailable
     /**
      * Add a line of text to the message.
      *
-     * @param string|array $line
-     *
+     * @param  string|array $line
      * @return $this
      */
     public function line($line)
     {
-        if (!$this->actionText) {
+        if (! $this->actionText) {
             $this->introLines[] = $this->formatLine($line);
         } else {
             $this->outroLines[] = $this->formatLine($line);

@@ -2,48 +2,41 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Collection;
 use TomIrons\Tuxedo\Message;
+use TomIrons\Tuxedo\TuxedoInvoice;
 
 class InvoiceMailable extends Mailable
 {
-    use Message;
-
     /**
-     * The view to use for the message.
+     * The Markdown template for the message.
      *
      * @var string
      */
-    public $view = 'tuxedo::templates.invoice';
+    public $markdown = 'tuxedo::templates.invoice';
 
     /**
-     * The plain text view to use for the message.
+     * ID of the invoice.
+     *
+     * @var int
+     */
+    public $id;
+
+    /**
+     * The user's name.
      *
      * @var string
      */
-    protected $textView = 'tuxedo::templates.invoice-plain';
+    public $name;
 
     /**
-     * The total amount of tax.
+     * The URL to pay the invoice.
      *
-     * @var string|int
+     * @var string
      */
-    public $tax;
-
-    /**
-     * The tax percentage.
-     *
-     * @var string|int
-     */
-    public $taxPercent;
-
-    /**
-     * The cost of shipping.
-     *
-     * @var string|int
-     */
-    public $shipping;
+    public $url;
 
     /**
      * The invoice date.
@@ -53,16 +46,30 @@ class InvoiceMailable extends Mailable
     public $date;
 
     /**
-     * The total before tax and shipping.
+     * The date the invoice is due.
      *
-     * @var string|int
+     * @var string
      */
-    public $subtotal;
+    public $dueDate;
+
+    /**
+     * The cost of shipping.
+     *
+     * @var int
+     */
+    public $shipping;
+
+    /**
+     * The cost of tax.
+     *
+     * @var int
+     */
+    public $tax;
 
     /**
      * The invoice total.
      *
-     * @var string|int
+     * @var int
      */
     public $total;
 
@@ -74,24 +81,61 @@ class InvoiceMailable extends Mailable
     public $items;
 
     /**
-     * The column to find the name of a product.
-     *
-     * @var string
+     * The keys to use when data needs retrieved.
+     * @var array
      */
-    protected $nameKey = 'product_name';
+    public $keys = ['name' => 'product_name', 'price' => 'product_price'];
 
     /**
-     * The column to find the price of a product.
+     * Information to display in the table.
      *
-     * @var string
+     * @var array
      */
-    protected $priceKey = 'product_price';
+    public $tableData;
+
+    /**
+     * Set the id of the invoice.
+     *
+     * @param $id
+     * @return $this
+     */
+    public function id($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Set the name of the user.
+     *
+     * @param $name
+     * @return $this
+     */
+    public function name($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set the URL of the invoice.
+     *
+     * @param $url
+     * @return $this
+     */
+    public function url($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
 
     /**
      * Add multiple item's to the invoice.
      *
      * @param Collection|array $items
-     *
      * @return $this
      */
     public function items($items)
@@ -101,7 +145,7 @@ class InvoiceMailable extends Mailable
         }
 
         foreach ($items as $item) {
-            $this->item($item[$this->nameKey], $item[$this->priceKey]);
+            $this->item($item[$this->keys['name']], $item[$this->keys['price']]);
         }
 
         return $this;
@@ -110,33 +154,30 @@ class InvoiceMailable extends Mailable
     /**
      * Add an item to the invoice.
      *
-     * @param string     $name
+     * @param string $name
      * @param string|int $price
      */
     private function item($name, $price)
     {
         if (!$this->items instanceof Collection) {
-            $this->items = new Collection();
+            $this->items = new Collection;
         }
 
         $this->items->push([
-            'product_name'  => $name,
-            'product_price' => $price,
+            'product_name' => $name,
+            'product_price' => $price
         ]);
     }
 
     /**
-     * Calculate the subtotal, tax, and total.
+     * Set the due date for the invoice.
      *
+     * @param string $date
      * @return $this
      */
-    public function calculate()
+    public function due($date)
     {
-        $this->subtotal = $this->items->sum('product_price');
-
-        $this->tax = $this->subtotal * ($this->taxPercent / 100);
-
-        $this->total = $this->subtotal + $this->tax + $this->shipping;
+        $this->dueDate = $date;
 
         return $this;
     }
@@ -145,7 +186,6 @@ class InvoiceMailable extends Mailable
      * Set the customer information for the invoice.
      *
      * @param string $date
-     *
      * @return $this
      */
     public function date($date)
@@ -156,47 +196,39 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the shipping cost.
-     *
-     * @param string|int $shipping
+     * Calculate the subtotal, tax, and total.
      *
      * @return $this
      */
-    public function shipping($shipping)
+    public function calculate($taxPercent = 0, $shipping = 0)
     {
+        $subtotal = $this->items->sum('product_price');
+
+        $this->tax = $subtotal * ($taxPercent / 100);
+
         $this->shipping = $shipping;
 
-        return $this;
+        $this->total = $subtotal + $this->tax + $this->shipping;
+
+        $this->dataToArray();
     }
 
     /**
-     * Set the tax percentage.
-     *
-     * @param string|int $percent
+     * Set the data to use in the table.
      *
      * @return $this
      */
-    public function tax($percent)
+    private function dataToArray()
     {
-        $this->taxPercent = $percent;
-
-        return $this;
-    }
-
-    /**
-     * Add a line of text to the message.
-     *
-     * @param string|array $line
-     *
-     * @return $this
-     */
-    public function line($line)
-    {
-        if (!$this->items) {
-            $this->introLines[] = $this->formatLine($line);
-        } else {
-            $this->outroLines[] = $this->formatLine($line);
-        }
+        $this->tableData = [
+            'id' => $this->id,
+            'date' => $this->date,
+            'items' => $this->items,
+            'shipping' => $this->shipping ? number_format($this->shipping, 2) : null,
+            'tax' => $this->tax ? number_format($this->tax, 2) : null,
+            'total' => number_format($this->total, 2),
+            'keys' => $this->keys
+        ];
 
         return $this;
     }
