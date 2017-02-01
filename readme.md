@@ -37,6 +37,7 @@ php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
 
 #### General Methods
+These methods are currently only available in `ActionMailable` and `AlertMailable`.
 - `gretting($gretting)` - Sets the greeting for the message.
 - `line($line)` - Add a line of text to the message.
   
