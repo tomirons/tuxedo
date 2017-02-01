@@ -92,6 +92,10 @@ class TuxedoTestMail extends ActionMailable
 ### AlertMailable
 
 #### Methods
+- `info()` - Sets the type of the alert to `info`.
+- `warning()` - Sets the type of the alert to `warning`.
+- `success()` - Sets the type of the alert to `success`.
+- `error()` - Sets the type of the alert to `error`.
 - `type($type)` - Sets the type of alert, options are `info`, `success`, `warning`, and `error`.
 - `message($message)` - Sets the message to display in the alert.
 
