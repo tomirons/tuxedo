@@ -48,6 +48,7 @@ These methods are currently only available in `ActionMailable` and `AlertMailabl
 - `action($text, $url)` - Sets the button text and url.
 - `success()` - Sets the button color to `green`.
 - `error()` - Sets the button color to `red`.
+- `info()` - Sets the button color to `blue`.
   
 #### Example
 ````php

@@ -38,6 +38,18 @@ class ActionMailable extends Mailable
     public $actionUrl;
 
     /**
+     * Indicate that the message gives information about a general operation.
+     *
+     * @return $this
+     */
+    public function info()
+    {
+        $this->color = 'blue';
+
+        return $this;
+    }
+
+    /**
      * Indicate that the message gives information about a successful operation.
      *
      * @return $this
