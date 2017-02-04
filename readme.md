@@ -83,7 +83,7 @@ class TuxedoTestMail extends ActionMailable
         return $this->greeting('Hello!')
                     ->success()
                     ->line('Some line of text to tell you what exactly is going on.')
-                    ->action('Click Me', url('/'))
+                    ->action('Click Me', 'http://example.com')
                     ->line('Some other information to be displayed after the button.');
     }
 }
