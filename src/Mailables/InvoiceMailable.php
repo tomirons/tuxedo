@@ -215,7 +215,7 @@ class InvoiceMailable extends Mailable
 
         $this->total = $subtotal + $this->tax + $this->shipping;
 
-        $this->dataToArray();
+        return $this->dataToArray();
     }
 
     /**
