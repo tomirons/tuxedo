@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\Mail;
 use TomIrons\Tuxedo\Mailables\InvoiceMailable;
 
 class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
