@@ -12,7 +12,7 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->mailable = new InvoiceMailable;
+        $this->mailable = new InvoiceMailable();
     }
 
     public function testIdMethod()
@@ -34,7 +34,7 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
     public function testDueMethod()
     {
         date_default_timezone_set('America/Detroit');
-        $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->due(date('l, M j Y \a\t g:i a', strtotime("+7 days"))));
+        $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->due(date('l, M j Y \a\t g:i a', strtotime('+7 days'))));
     }
 
     public function testUrlMethod()
@@ -46,7 +46,7 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->items([
             ['product_name' => 'Example Product', 'product_price' => 123.99],
-            ['product_name' => 'Second Product', 'product_price' => 321.99]
+            ['product_name' => 'Second Product', 'product_price' => 321.99],
         ]));
     }
 
