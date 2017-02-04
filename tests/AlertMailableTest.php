@@ -12,7 +12,7 @@ class AlertMailableTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->mailable = new AlertMailable;
+        $this->mailable = new AlertMailable();
     }
 
     public function testInfoMethod()

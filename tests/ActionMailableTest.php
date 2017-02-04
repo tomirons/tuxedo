@@ -12,7 +12,7 @@ class ActionMailableTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->mailable = new ActionMailable;
+        $this->mailable = new ActionMailable();
     }
 
     public function testInfoMethod()
