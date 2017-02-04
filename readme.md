@@ -190,7 +190,7 @@ class InvoiceMail extends InvoiceMailable
                     ->name('John Doe')
                     ->date(Carbon::now()->format('l, M j Y \a\t g:i a'))
                     ->due(Carbon::now()->addDays(7)->format('l, M j Y \a\t g:i a'))
-                    ->url('https://laravel.com')
+                    ->url('https://example.com')
                     ->items([
                         ['product_name' => 'Example Product', 'product_price' => 123.99],
                         ['product_name' => 'Second Product', 'product_price' => 321.99]
