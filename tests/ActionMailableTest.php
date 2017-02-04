@@ -44,4 +44,9 @@ class ActionMailableTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(ActionMailable::class, $this->mailable->line('Some line of text to tell you what exactly is going on.'));
     }
+
+    public function testGrettingMethod()
+    {
+        $this->assertInstanceOf(ActionMailable::class, $this->mailable->greeting('Hello!'));
+    }
 }
