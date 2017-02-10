@@ -38,7 +38,7 @@ There are currently 3 different types of classes you can extend. `ActionMailable
 
 #### General Methods
 These methods are currently only available in `ActionMailable` and `AlertMailable`.
-- `gretting($gretting)` - Sets the greeting for the message.
+- `greeting($greeting)` - Sets the greeting for the message.
 - `line($line)` - Add a line of text to the message.
   
 ### ActionMailable
