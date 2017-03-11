@@ -65,9 +65,7 @@ class AlertMailable extends Mailable
      */
     public function info()
     {
-        $this->type = 'info';
-
-        return $this;
+        return $this->type('info');
     }
 
     /**
@@ -77,9 +75,7 @@ class AlertMailable extends Mailable
      */
     public function warning()
     {
-        $this->type = 'warning';
-
-        return $this;
+        return $this->type('warning');
     }
 
     /**
@@ -89,9 +85,7 @@ class AlertMailable extends Mailable
      */
     public function success()
     {
-        $this->type = 'success';
-
-        return $this;
+        return $this->type('success');
     }
 
     /**
@@ -101,8 +95,6 @@ class AlertMailable extends Mailable
      */
     public function error()
     {
-        $this->type = 'error';
-
-        return $this;
+        return $this->type('error');
     }
 }
