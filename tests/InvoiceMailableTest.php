@@ -54,7 +54,7 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
     {
         $this->mailable->items([
             ['product_name' => 'Example Product', 'product_price' => 123.99],
-            ['product_name' => 'Second Product', 'product_price' => 321.99]
+            ['product_name' => 'Second Product', 'product_price' => 321.99],
         ]);
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->calculate(3, 15));
     }
