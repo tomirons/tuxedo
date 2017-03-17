@@ -9,8 +9,8 @@ Thanks for using {{ config('app.name') }}. This is an invoice for your recent pu
 # Due By: {{ $dueDate }}
 @endcomponent
 
-@component('mail::button', ['url' => $url, 'color' => 'green'])
-Pay this invoice
+@component('mail::button', ['url' => $actionUrl, 'color' => $color])
+{{ $actionText }}
 @endcomponent
 
 @component('mail::invoice.table', ['data' => $tableData])
@@ -34,7 +34,7 @@ Regards, <br>
 @component('mail::subcopy')
 If you’re having trouble with the button above, copy and paste the URL below into your web browser.
 
-{{ $url }}
+{{ $actionUrl }}
 @endcomponent
 
 @endcomponent
