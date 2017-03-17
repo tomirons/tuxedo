@@ -33,7 +33,7 @@ TomIrons\Tuxedo\TuxedoServiceProvider::class
 ````shell
 php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
 ````
-    
+
 ## Classes
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
 
@@ -62,7 +62,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\ActionMailable;
 
-class TuxedoTestMail extends ActionMailable
+class ActionMail extends ActionMailable
 {
     use Queueable, SerializesModels;
 
@@ -79,17 +79,20 @@ class TuxedoTestMail extends ActionMailable
     /**
      * Build the message.
      *
+     * @return $this
      */
     public function build()
     {
         return $this->greeting('Hello!')
-                    ->success()
                     ->line('Some line of text to tell you what exactly is going on.')
-                    ->action('Click Me', 'http://example.com')
+                    ->action('Click here to do something fun', url('/'))
                     ->line('Some other information to be displayed after the button.');
     }
 }
 ````
+
+#### Screenshot
+![Action](https://i.imgur.com/1VHPO0c.png)
 
 ### AlertMailable
 
@@ -112,7 +115,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\AlertMailable;
 
-class TuxedoTestMail extends AlertMailable
+class AlertMail extends AlertMailable
 {
     use Queueable, SerializesModels;
 
@@ -129,16 +132,20 @@ class TuxedoTestMail extends AlertMailable
     /**
      * Build the message.
      *
+     * @return $this
      */
     public function build()
     {
         return $this->greeting('Hello!')
-                    ->error()
-                    ->message('Something has gone wrong, please contact support.')
+                    ->info()
+                    ->message('Some text goes here to inform the user')
                     ->line('Some line of text to tell you what exactly is going on.');
     }
 }
 ````
+
+#### Screenshot
+![Alert](https://i.imgur.com/ckOLIxT.png)
 
 ### InvoiceMailable
 
@@ -162,7 +169,6 @@ namespace App\Mail;
 
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\InvoiceMailable;
@@ -202,6 +208,9 @@ class InvoiceMail extends InvoiceMailable
 }
 
 ````
+
+#### Screenshot
+![Invoice](https://i.imgur.com/d5S8gJl.png)
 
 ## License
 Tuxedo is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
