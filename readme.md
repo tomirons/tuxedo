@@ -157,7 +157,6 @@ class AlertMail extends AlertMailable
 - `name($name)` - Sets the name to begin the invoice with.
 - `date($date)` - Sets the date to display at the top of the invoice table.
 - `due($date)` - Sets the due date of the invoice.
-- `url($url)` - Sets the URL to pay the invoice.
 - `items($items)` - Add an list of items to the invoice. Acceptable variable types are `Collection` and `array`.
 - `calculate($taxPercent, $shipping)` - Calculates the tax and final total, **MUST** be the last method called.
 
@@ -198,7 +197,7 @@ class InvoiceMail extends InvoiceMailable
                     ->name('John Doe')
                     ->date(Carbon::now()->format('l, M j Y \a\t g:i a'))
                     ->due(Carbon::now()->addDays(7)->format('l, M j Y \a\t g:i a'))
-                    ->url('https://example.com')
+                    ->action('Click me to pay', url('/'))
                     ->items([
                         ['product_name' => 'Example Product', 'product_price' => 123.99],
                         ['product_name' => 'Second Product', 'product_price' => 321.99]
@@ -209,7 +208,7 @@ class InvoiceMail extends InvoiceMailable
 ````
 
 #### Screenshot
-![Invoice](https://i.imgur.com/9wISUly.png)
+![Invoice](http://i.imgur.com/GwnA9Zc.png)
 
 ## License
 Tuxedo is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
