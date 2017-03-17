@@ -62,7 +62,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\ActionMailable;
 
-class TuxedoTestMail extends ActionMailable
+class ActionMail extends ActionMailable
 {
     use Queueable, SerializesModels;
 
@@ -79,20 +79,20 @@ class TuxedoTestMail extends ActionMailable
     /**
      * Build the message.
      *
+     * @return $this
      */
     public function build()
     {
         return $this->greeting('Hello!')
-                    ->success()
                     ->line('Some line of text to tell you what exactly is going on.')
-                    ->action('Click Me', 'http://example.com')
+                    ->action('Click here to do something fun', url('/'))
                     ->line('Some other information to be displayed after the button.');
     }
 }
 ````
 
 #### Screenshot
-![Action](http://imageshack.com/a/img924/1540/q5pOd6.png)
+![Action](https://i.imgur.com/DSZScLo.png)
 
 ### AlertMailable
 
