@@ -95,7 +95,7 @@ class InvoiceMailable extends Mailable
     /**
      * Set the id of the invoice.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return $this
      */
@@ -203,8 +203,8 @@ class InvoiceMailable extends Mailable
     /**
      * Calculate the subtotal, tax, and total.
      *
-     * @param integer $taxPercent
-     * @param integer $shipping
+     * @param int $taxPercent
+     * @param int $shipping
      *
      * @return $this
      */
