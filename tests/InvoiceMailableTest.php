@@ -37,11 +37,6 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->due(date('l, M j Y \a\t g:i a', strtotime('+7 days'))));
     }
 
-    public function testUrlMethod()
-    {
-        $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->url('https://laravel.com'));
-    }
-
     public function testItemsMethod()
     {
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->items([
