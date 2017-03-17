@@ -44,9 +44,7 @@ class ActionMailable extends Mailable
      */
     public function info()
     {
-        $this->color = 'blue';
-
-        return $this;
+        return $this->color('blue');
     }
 
     /**
@@ -56,9 +54,7 @@ class ActionMailable extends Mailable
      */
     public function success()
     {
-        $this->color = 'green';
-
-        return $this;
+        return $this->color('green');
     }
 
     /**
@@ -68,9 +64,7 @@ class ActionMailable extends Mailable
      */
     public function error()
     {
-        $this->color = 'red';
-
-        return $this;
+        return $this->color('red');
     }
 
     /**
