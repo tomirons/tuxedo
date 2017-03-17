@@ -92,7 +92,7 @@ class ActionMail extends ActionMailable
 ````
 
 #### Screenshot
-![Action](https://i.imgur.com/DSZScLo.png)
+![Action](https://i.imgur.com/1VHPO0c.png)
 
 ### AlertMailable
 
@@ -210,7 +210,7 @@ class InvoiceMail extends InvoiceMailable
 ````
 
 #### Screenshot
-![Invoice](https://i.imgur.com/LTBg6GA.png)
+![Invoice](https://i.imgur.com/d5S8gJl.png)
 
 ## License
 Tuxedo is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
