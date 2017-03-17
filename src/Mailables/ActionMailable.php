@@ -3,7 +3,7 @@
 namespace TomIrons\Tuxedo\Mailables;
 
 use Illuminate\Mail\Mailable;
-use TomIrons\Tuxedo\Concerns\HasAction;
+use TomIrons\Tuxedo\Traits\HasAction;
 use TomIrons\Tuxedo\Message;
 
 class ActionMailable extends Mailable

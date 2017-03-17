@@ -4,7 +4,7 @@ namespace TomIrons\Tuxedo\Mailables;
 
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Collection;
-use TomIrons\Tuxedo\Concerns\HasAction;
+use TomIrons\Tuxedo\Traits\HasAction;
 
 class InvoiceMailable extends Mailable
 {

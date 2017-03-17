@@ -1,6 +1,6 @@
 <?php
 
-namespace TomIrons\Tuxedo\Concerns;
+namespace TomIrons\Tuxedo\Traits;
 
 trait HasAction
 {
