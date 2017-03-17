@@ -115,7 +115,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use TomIrons\Tuxedo\Mailables\AlertMailable;
 
-class TuxedoTestMail extends AlertMailable
+class AlertMail extends AlertMailable
 {
     use Queueable, SerializesModels;
 
@@ -132,19 +132,20 @@ class TuxedoTestMail extends AlertMailable
     /**
      * Build the message.
      *
+     * @return $this
      */
     public function build()
     {
         return $this->greeting('Hello!')
-                    ->error()
-                    ->message('Something has gone wrong, please contact support.')
+                    ->info()
+                    ->message('Some text goes here to inform the user')
                     ->line('Some line of text to tell you what exactly is going on.');
     }
 }
 ````
 
 #### Screenshot
-![Alert](http://imageshack.com/a/img923/3614/yzaGDp.png)
+![Alert](https://i.imgur.com/ckOLIxT.png)
 
 ### InvoiceMailable
 
