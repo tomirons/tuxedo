@@ -33,7 +33,7 @@ TomIrons\Tuxedo\TuxedoServiceProvider::class
 ````shell
 php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
 ````
-    
+
 ## Classes
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
 
@@ -43,6 +43,9 @@ These methods are currently only available in `ActionMailable` and `AlertMailabl
 - `line($line)` - Add a line of text to the message.
   
 ### ActionMailable
+
+#### Screenshot
+http://imageshack.com/a/img924/1540/q5pOd6.png
 
 #### Methods
 - `color($color)` - Sets the color of the button. Available options are `blue`, `green`, and `red`.
@@ -93,6 +96,9 @@ class TuxedoTestMail extends ActionMailable
 
 ### AlertMailable
 
+#### Screenshot
+http://imageshack.com/a/img923/3614/yzaGDp.png
+
 #### Methods
 - `info()` - Sets the type of the alert to `info`.
 - `warning()` - Sets the type of the alert to `warning`.
@@ -141,6 +147,9 @@ class TuxedoTestMail extends AlertMailable
 ````
 
 ### InvoiceMailable
+
+#### Screenshot
+http://imageshack.com/a/img921/1350/2SIrk3.png
 
 #### Properties
 - `$keys|array` - Set which keys to use when looking for an item's name and price.
