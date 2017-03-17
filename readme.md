@@ -44,9 +44,6 @@ These methods are currently only available in `ActionMailable` and `AlertMailabl
   
 ### ActionMailable
 
-#### Screenshot
-http://imageshack.com/a/img924/1540/q5pOd6.png
-
 #### Methods
 - `color($color)` - Sets the color of the button. Available options are `blue`, `green`, and `red`.
 - `action($text, $url)` - Sets the button text and url.
@@ -94,10 +91,10 @@ class TuxedoTestMail extends ActionMailable
 }
 ````
 
-### AlertMailable
-
 #### Screenshot
-http://imageshack.com/a/img923/3614/yzaGDp.png
+![Action](http://imageshack.com/a/img924/1540/q5pOd6.png)
+
+### AlertMailable
 
 #### Methods
 - `info()` - Sets the type of the alert to `info`.
@@ -146,10 +143,10 @@ class TuxedoTestMail extends AlertMailable
 }
 ````
 
-### InvoiceMailable
-
 #### Screenshot
-http://imageshack.com/a/img921/1350/2SIrk3.png
+![Alert](http://imageshack.com/a/img923/3614/yzaGDp.png)
+
+### InvoiceMailable
 
 #### Properties
 - `$keys|array` - Set which keys to use when looking for an item's name and price.
@@ -211,6 +208,9 @@ class InvoiceMail extends InvoiceMailable
 }
 
 ````
+
+#### Screenshot
+![Invoice](http://imageshack.com/a/img921/1350/2SIrk3.png)
 
 ## License
 Tuxedo is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
