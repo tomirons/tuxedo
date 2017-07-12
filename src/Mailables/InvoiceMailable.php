@@ -97,6 +97,35 @@ class InvoiceMailable extends Mailable
     }
 
     /**
+     * Set the due date for the invoice.
+     *
+     * @param string $date
+     *
+     * @return $this
+     */
+    public function due($date)
+    {
+        $this->dueDate = $date;
+
+        return $this;
+    }
+
+    /**
+     * Set the customer information for the invoice.
+     *
+     * @param string $date
+     *
+     * @return $this
+     */
+    public function date($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+
+    /**
      * Add multiple item's to the invoice.
      *
      * @param Collection|array $items
@@ -132,34 +161,6 @@ class InvoiceMailable extends Mailable
             'product_name'  => $name,
             'product_price' => $price,
         ]);
-    }
-
-    /**
-     * Set the due date for the invoice.
-     *
-     * @param string $date
-     *
-     * @return $this
-     */
-    public function due($date)
-    {
-        $this->dueDate = $date;
-
-        return $this;
-    }
-
-    /**
-     * Set the customer information for the invoice.
-     *
-     * @param string $date
-     *
-     * @return $this
-     */
-    public function date($date)
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     /**
