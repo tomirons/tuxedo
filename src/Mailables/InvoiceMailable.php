@@ -124,7 +124,6 @@ class InvoiceMailable extends Mailable
         return $this;
     }
 
-
     /**
      * Add multiple item's to the invoice.
      *
