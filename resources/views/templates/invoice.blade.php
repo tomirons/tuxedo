@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# Hi {{ $name }}!
+# {{ $greeting }}
 
 Thanks for using {{ config('app.name') }}. This is an invoice for your recent purchase.
 

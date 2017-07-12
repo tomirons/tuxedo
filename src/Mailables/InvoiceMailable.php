@@ -5,10 +5,12 @@ namespace TomIrons\Tuxedo\Mailables;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Collection;
 use TomIrons\Tuxedo\Traits\HasAction;
+use TomIrons\Tuxedo\Traits\HasGreeting;
 
 class InvoiceMailable extends Mailable
 {
-    use HasAction;
+    use HasAction,
+        HasGreeting;
 
     /**
      * The Markdown template for the message (if applicable).
@@ -23,13 +25,6 @@ class InvoiceMailable extends Mailable
      * @var int
      */
     public $id;
-
-    /**
-     * The user's name.
-     *
-     * @var string
-     */
-    public $name;
 
     /**
      * The invoice date.
@@ -97,20 +92,6 @@ class InvoiceMailable extends Mailable
     public function id($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Set the name of the user.
-     *
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function name($name)
-    {
-        $this->name = $name;
 
         return $this;
     }
