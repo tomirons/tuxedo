@@ -10,7 +10,9 @@ use TomIrons\Tuxedo\Traits\HasLine;
 
 class ActionMailable extends Mailable
 {
-    use HasAction, HasGreeting, HasLine;
+    use HasAction,
+        HasGreeting,
+        HasLine;
 
     /**
      * The Markdown template for the message (if applicable).

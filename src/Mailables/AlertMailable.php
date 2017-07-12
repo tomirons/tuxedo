@@ -9,7 +9,8 @@ use TomIrons\Tuxedo\Traits\HasLine;
 
 class AlertMailable extends Mailable
 {
-    use HasGreeting, HasLine;
+    use HasGreeting,
+        HasLine;
 
     /**
      * The Markdown template for the message (if applicable).
