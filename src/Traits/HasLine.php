@@ -27,6 +27,10 @@ trait HasLine
      */
     public function line($line)
     {
+        if (trait_exists(HasAction::class) && !$this->actionText) {
+            $this->introLines[] = $this->formatLine($line);
+        }
+
         $this->outroLines[] = $this->formatLine($line);
 
         return $this;
