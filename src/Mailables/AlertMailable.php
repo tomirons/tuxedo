@@ -2,15 +2,14 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
-use Illuminate\Mail\Mailable;
 use TomIrons\Tuxedo\Message;
 use TomIrons\Tuxedo\Traits\HasGreeting;
 use TomIrons\Tuxedo\Traits\HasLine;
+use TomIrons\Tuxedo\TuxedoMessage;
 
-class AlertMailable extends Mailable
+class AlertMailable extends TuxedoMessage
 {
-    use HasGreeting,
-        HasLine;
+    use HasLine;
 
     /**
      * The Markdown template for the message (if applicable).
