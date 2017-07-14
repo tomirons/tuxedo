@@ -211,7 +211,7 @@ class InvoiceMail extends InvoiceMailable
 ````
 
 #### Screenshot
-![Invoice](http://i.imgur.com/GwnA9Zc.png)
+![Invoice](https://i.imgur.com/d5S8gJl.png)
 
 ## License
 Tuxedo is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
