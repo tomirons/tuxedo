@@ -2,6 +2,8 @@
 
 namespace TomIrons\Tuxedo;
 
+use Illuminate\Mail\Mailable;
+
 class TuxedoMessage extends Mailable
 {
     /**
