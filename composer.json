@@ -26,6 +26,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "TomIrons\\Tuxedo\\TuxedoServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
