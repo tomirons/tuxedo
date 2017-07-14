@@ -1,6 +1,6 @@
 {
     "name": "tomirons/tuxedo",
-    "description": "Simple transactional email classes/templates for Laravel 5.4 mailables",
+    "description": "Simple transactional email classes/templates for Laravel mailables",
     "license": "MIT",
     "authors": [
         {
@@ -9,10 +9,10 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/database": "5.4.*",
-        "illuminate/mail": "5.4.*",
-        "illuminate/support": "5.4.*"
+        "php": ">=7.0",
+        "illuminate/database": "5.5.*",
+        "illuminate/mail": "5.5.*",
+        "illuminate/support": "5.5.*"
     },
     "require-dev": {
         "mockery/mockery": "~0.9.4",
