@@ -1,16 +1,18 @@
 @component('mail::message')
 
-# Hi {{ $name }}!
+# {{ $greeting }}
 
-Thanks for using {{ config('app.name') }}. This is an invoice for your recent purchase.
+@foreach($introLines as $line)
+    {{ $line }}
+@endforeach
 
 @component('mail::invoice.attributes', ['total' => $tableData['total'], 'dueDate' => $dueDate])
 # Amount Due: {{ $tableData['total'] }} <br>
 # Due By: {{ $dueDate }}
 @endcomponent
 
-@component('mail::button', ['url' => $url, 'color' => 'green'])
-Pay this invoice
+@component('mail::button', ['url' => $actionUrl, 'color' => $color])
+{{ $actionText }}
 @endcomponent
 
 @component('mail::invoice.table', ['data' => $tableData])
@@ -28,13 +30,20 @@ Pay this invoice
 | Total | {{ $tableData['total'] }} |
 @endcomponent
 
-Regards, <br>
-{{ config('app.name') }}
+@foreach($outroLines as $line)
+    {{ $line }}
+@endforeach
+
+@if($salutation)
+{{ $salutation }}
+@else
+Regards,<br>{{ config('app.name') }}
+@endif
 
 @component('mail::subcopy')
 If you’re having trouble with the button above, copy and paste the URL below into your web browser.
 
-{{ $url }}
+{{ $actionUrl }}
 @endcomponent
 
 @endcomponent

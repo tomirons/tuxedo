@@ -2,12 +2,17 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
-use Illuminate\Mail\Mailable;
 use Illuminate\Support\Collection;
-use TomIrons\Tuxedo\Message;
+use TomIrons\Tuxedo\Traits\HasAction;
+use TomIrons\Tuxedo\Traits\HasGreeting;
+use TomIrons\Tuxedo\Traits\HasLine;
+use TomIrons\Tuxedo\TuxedoMessage;
 
-class InvoiceMailable extends Mailable
+class InvoiceMailable extends TuxedoMessage
 {
+    use HasAction,
+        HasLine;
+
     /**
      * The Markdown template for the message (if applicable).
      *
@@ -21,20 +26,6 @@ class InvoiceMailable extends Mailable
      * @var int
      */
     public $id;
-
-    /**
-     * The user's name.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * The URL to pay the invoice.
-     *
-     * @var string
-     */
-    public $url;
 
     /**
      * The invoice date.
@@ -95,7 +86,7 @@ class InvoiceMailable extends Mailable
     /**
      * Set the id of the invoice.
      *
-     * @param $id
+     * @param int $id
      *
      * @return $this
      */
@@ -107,29 +98,29 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the name of the user.
+     * Set the due date for the invoice.
      *
-     * @param $name
+     * @param string $date
      *
      * @return $this
      */
-    public function name($name)
+    public function due($date)
     {
-        $this->name = $name;
+        $this->dueDate = $date;
 
         return $this;
     }
 
     /**
-     * Set the URL of the invoice.
+     * Set the customer information for the invoice.
      *
-     * @param $url
+     * @param string $date
      *
      * @return $this
      */
-    public function url($url)
+    public function date($date)
     {
-        $this->url = $url;
+        $this->date = $date;
 
         return $this;
     }
@@ -173,35 +164,10 @@ class InvoiceMailable extends Mailable
     }
 
     /**
-     * Set the due date for the invoice.
-     *
-     * @param string $date
-     *
-     * @return $this
-     */
-    public function due($date)
-    {
-        $this->dueDate = $date;
-
-        return $this;
-    }
-
-    /**
-     * Set the customer information for the invoice.
-     *
-     * @param string $date
-     *
-     * @return $this
-     */
-    public function date($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
      * Calculate the subtotal, tax, and total.
+     *
+     * @param int $taxPercent
+     * @param int $shipping
      *
      * @return $this
      */

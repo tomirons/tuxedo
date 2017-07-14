@@ -20,11 +20,6 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->id(123456));
     }
 
-    public function testNameMethod()
-    {
-        $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->name('John Doe'));
-    }
-
     public function testDateMethod()
     {
         date_default_timezone_set('America/Detroit');
@@ -35,11 +30,6 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
     {
         date_default_timezone_set('America/Detroit');
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->due(date('l, M j Y \a\t g:i a', strtotime('+7 days'))));
-    }
-
-    public function testUrlMethod()
-    {
-        $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->url('https://laravel.com'));
     }
 
     public function testItemsMethod()

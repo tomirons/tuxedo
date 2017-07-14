@@ -1,20 +1,9 @@
 <?php
 
-/**
- * @credit Taylor Ottwell for the base of this trait, used `SimpleMessage` from laravel/laravel
- */
+namespace TomIrons\Tuxedo\Traits;
 
-namespace TomIrons\Tuxedo;
-
-trait Message
+trait HasLine
 {
-    /**
-     * The message's greeting.
-     *
-     * @var string|null
-     */
-    public $greeting = null;
-
     /**
      * The "intro" lines of the message.
      *
@@ -30,20 +19,6 @@ trait Message
     public $outroLines = [];
 
     /**
-     * Set the greeting of the message.
-     *
-     * @param string $greeting
-     *
-     * @return $this
-     */
-    public function greeting($greeting)
-    {
-        $this->greeting = $greeting;
-
-        return $this;
-    }
-
-    /**
      * Add a line of text to the message.
      *
      * @param string|array $line
@@ -52,6 +27,10 @@ trait Message
      */
     public function line($line)
     {
+        if (trait_exists(HasAction::class) && property_exists($this, 'actionText') && !$this->actionText) {
+            $this->introLines[] = $this->formatLine($line);
+        }
+
         $this->outroLines[] = $this->formatLine($line);
 
         return $this;
