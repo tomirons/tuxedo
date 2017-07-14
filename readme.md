@@ -37,9 +37,10 @@ php artisan vendor:publish --provider=TomIrons\Tuxedo\TuxedoServiceProvider
 ## Classes
 There are currently 3 different types of classes you can extend. `ActionMailable`, `AlertMailable`, and `InvoiceMailable`, and each have their own special properties and methods.
 
-#### General Methods
-These methods are currently only available in `ActionMailable` and `AlertMailable`.
+#### Global Methods
+These methods are available in **ALL** classes.
 - `greeting($greeting)` - Sets the greeting for the message.
+- `salutation($salutation)` - Sets the salutation for the message.
 - `line($line)` - Add a line of text to the message.
   
 ### ActionMailable
@@ -86,7 +87,8 @@ class ActionMail extends ActionMailable
         return $this->greeting('Hello!')
                     ->line('Some line of text to tell you what exactly is going on.')
                     ->action('Click here to do something fun', url('/'))
-                    ->line('Some other information to be displayed after the button.');
+                    ->line('Some other information to be displayed after the button.')
+                    ->salutation('Regards, Example App');
     }
 }
 ````
@@ -139,7 +141,8 @@ class AlertMail extends AlertMailable
         return $this->greeting('Hello!')
                     ->info()
                     ->message('Some text goes here to inform the user')
-                    ->line('Some line of text to tell you what exactly is going on.');
+                    ->line('Some line of text to tell you what exactly is going on.')
+                    ->salutation('Regards, Example App');
     }
 }
 ````
@@ -154,11 +157,10 @@ class AlertMail extends AlertMailable
 
 #### Methods
 - `id($id)` - Sets the invoice ID.
-- `name($name)` - Sets the name to begin the invoice with.
 - `date($date)` - Sets the date to display at the top of the invoice table.
 - `due($date)` - Sets the due date of the invoice.
 - `items($items)` - Add an list of items to the invoice. Acceptable variable types are `Collection` and `array`.
-- `calculate($taxPercent, $shipping)` - Calculates the tax and final total, **MUST** be the last method called.
+- `calculate($taxPercent, $shipping)` - Calculates the tax and final total, **MUST** be called after items have been added.
 
 #### Example
 ````php
@@ -194,7 +196,7 @@ class InvoiceMail extends InvoiceMailable
     public function build()
     {
         return $this->id(123456)
-                    ->name('John Doe')
+                    ->greeting('Hi John Doe!')
                     ->date(Carbon::now()->format('l, M j Y \a\t g:i a'))
                     ->due(Carbon::now()->addDays(7)->format('l, M j Y \a\t g:i a'))
                     ->action('Click me to pay', url('/'))
@@ -202,7 +204,8 @@ class InvoiceMail extends InvoiceMailable
                         ['product_name' => 'Example Product', 'product_price' => 123.99],
                         ['product_name' => 'Second Product', 'product_price' => 321.99]
                     ])
-                    ->calculate(3, 15);
+                    ->calculate(3, 15)
+                    ->salutation('Regards, Example App');
     }
 }
 ````
