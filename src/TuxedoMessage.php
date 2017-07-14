@@ -37,7 +37,8 @@ class TuxedoMessage extends Mailable
     /**
      * Set the salutation of the message.
      *
-     * @param  string  $salutation
+     * @param string $salutation
+     *
      * @return $this
      */
     public function salutation($salutation)

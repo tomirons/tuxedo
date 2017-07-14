@@ -3,7 +3,6 @@
 namespace TomIrons\Tuxedo\Mailables;
 
 use TomIrons\Tuxedo\Message;
-use TomIrons\Tuxedo\Traits\HasGreeting;
 use TomIrons\Tuxedo\Traits\HasLine;
 use TomIrons\Tuxedo\TuxedoMessage;
 
