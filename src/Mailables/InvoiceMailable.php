@@ -5,11 +5,13 @@ namespace TomIrons\Tuxedo\Mailables;
 use Illuminate\Support\Collection;
 use TomIrons\Tuxedo\Traits\HasAction;
 use TomIrons\Tuxedo\Traits\HasGreeting;
+use TomIrons\Tuxedo\Traits\HasLine;
 use TomIrons\Tuxedo\TuxedoMessage;
 
 class InvoiceMailable extends TuxedoMessage
 {
-    use HasAction;
+    use HasAction,
+        HasLine;
 
     /**
      * The Markdown template for the message (if applicable).
