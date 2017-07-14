@@ -20,11 +20,6 @@ class InvoiceMailableTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->id(123456));
     }
 
-    public function testNameMethod()
-    {
-        $this->assertInstanceOf(InvoiceMailable::class, $this->mailable->name('John Doe'));
-    }
-
     public function testDateMethod()
     {
         date_default_timezone_set('America/Detroit');
