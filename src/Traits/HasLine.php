@@ -29,9 +29,9 @@ trait HasLine
     {
         if (trait_exists(HasAction::class) && property_exists($this, 'actionText') && !$this->actionText) {
             $this->introLines[] = $this->formatLine($line);
+        } else {
+            $this->outroLines[] = $this->formatLine($line);
         }
-
-        $this->outroLines[] = $this->formatLine($line);
 
         return $this;
     }
