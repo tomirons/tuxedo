@@ -3,7 +3,8 @@
 # {{ $greeting }}
 
 @foreach($introLines as $line)
-    {{ $line }}
+{{ $line }}
+
 @endforeach
 
 @component('mail::invoice.attributes', ['total' => $tableData['total'], 'dueDate' => $dueDate])
@@ -31,7 +32,8 @@
 @endcomponent
 
 @foreach($outroLines as $line)
-    {{ $line }}
+{{ $line }}
+
 @endforeach
 
 @if($salutation)
