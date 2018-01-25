@@ -3,7 +3,8 @@
         <td>
             <h3>{{ $data['id'] }}</h3></td>
         <td>
-            <h3 class="align-right">{{ $data['date'] }}</h3></td>
+            <h3 class="align-right">{{ $data['date'] }}</h3>
+        </td>
     </tr>
     <tr>
         <td colspan="2">
