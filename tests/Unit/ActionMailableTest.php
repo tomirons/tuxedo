@@ -1,14 +1,15 @@
 <?php
 
-namespace Tests;
+namespace Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use TomIrons\Tuxedo\Mailables\ActionMailable;
 
-class ActionMailableTest extends \PHPUnit_Framework_TestCase
+class ActionMailableTest extends TestCase
 {
     protected $mailable;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
