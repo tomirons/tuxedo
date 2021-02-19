@@ -32,7 +32,6 @@ class TuxedoServiceProvider extends ServiceProvider
      */
     public function alterConfiguration()
     {
-        config()->set('mail.markdown.theme', 'tuxedo');
         config()->set('mail.markdown.paths', array_merge([__DIR__.'/../resources/views'], config('mail.markdown.paths')));
     }
 }

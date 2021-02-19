@@ -7,6 +7,13 @@ use Illuminate\Mail\Mailable;
 class TuxedoMessage extends Mailable
 {
     /**
+     * The theme for the mailable.
+     *
+     * @var string
+     */
+    public $theme = 'tuxedo';
+
+    /**
      * The message's greeting.
      *
      * @var string
