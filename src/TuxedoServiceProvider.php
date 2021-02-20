@@ -2,7 +2,6 @@
 
 namespace TomIrons\Tuxedo;
 
-use Illuminate\Mail\Markdown;
 use Illuminate\Support\ServiceProvider;
 
 class TuxedoServiceProvider extends ServiceProvider
@@ -16,13 +15,21 @@ class TuxedoServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'tuxedo');
 
+        $this->alterConfiguration();
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/tuxedo'),
-            ], 'tuxedo');
+                __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/tuxedo'),
+            ], 'tuxedo-mail');
         }
-
-        $this->alterConfiguration();
     }
 
     /**
