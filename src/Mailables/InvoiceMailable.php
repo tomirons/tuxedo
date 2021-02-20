@@ -9,8 +9,8 @@ use TomIrons\Tuxedo\TuxedoMessage;
 
 class InvoiceMailable extends TuxedoMessage
 {
-    use HasAction,
-        HasLine;
+    use HasAction;
+    use HasLine;
 
     /**
      * The Markdown template for the message (if applicable).
