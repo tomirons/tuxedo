@@ -2,15 +2,14 @@
 
 namespace TomIrons\Tuxedo\Mailables;
 
-use TomIrons\Tuxedo\Message;
 use TomIrons\Tuxedo\Traits\HasAction;
 use TomIrons\Tuxedo\Traits\HasLine;
 use TomIrons\Tuxedo\TuxedoMessage;
 
 class ActionMailable extends TuxedoMessage
 {
-    use HasAction,
-        HasLine;
+    use HasAction;
+    use HasLine;
 
     /**
      * The Markdown template for the message (if applicable).
